@@ -1,0 +1,293 @@
+%\datum{13. April 2015}
+\section{Grundlagen}
+\subsection{Definition und Beispiele strategischer Spiele}
+\begin{definition*}
+  Ein \markdef{(strategisches) Spiel (in Normalform)} wird beschrieben durch
+  \begin{itemize}
+  \item  eine Menge $\set{1, \dots, N}$ von Spielern;
+  \item  eine nichtleere Strategiemenge $X_{\nu}$ für jeden Spieler $\nu = 1, \dots, N$;
+  \item Funktionen $f_{\nu}: X \to \R$ (sogenannte \markdef{Zielfunktion} des Spielers $\nu$) für $\nu = 1, \dots, N$, wobei $X \coloneqq= X_{1} \times \dots \times X_{N}$ die \markdef{Menge aller Strategiekombinationen} bezeichnet. 
+  \end{itemize}
+Zur Abkürzung für ein solches Spiel schreiben wir
+\begin{align*}
+  \Gamma \coloneqq \set{f_{\nu}, X_{\nu}}_{\nu = 1}^{N}
+\end{align*}
+Hierbei ist zunächst noch offen, ob der Spieler $\nu$ seine Zielfunktion minimieren oder maximieren will.
+\end{definition*}
+\begin{beispiel} Gefangenendilemma
+
+Zwei Gefangene haben gemeinsam eine Straftat verübt. Jeder Einzelne kann die Straftat gestehen oder leugnen.
+\begin{itemize}
+\item Gestehen beide, so muss jeder fünf Jahre ins Gefängnis.
+\item Leugnen beide, kann ihnen die Straftat zwar nicht nachgewiesen werden, aber trotzdem erhält jeder zwei Jahre Gefängnisstrafe wegen unerlaubten Waffenbesitzes. 
+\item Gesteht einer von beiden und der andere nicht, so erhält der nicht Geständige zehn Jahre Gefängnisstrafe, während der Geständige aufgrund einer Kronzeugenregelung freigelassen wird.  
+\end{itemize}
+Modellierung als Spiel:
+\begin{itemize}
+\item Die beiden Gefangenen sind die Spieler 1 und 2. 
+\item $X_{1/2} = \set{L, G}$, wobei $L$ für Leugnen und $G$ für Gestehen steht. 
+\item Auszahlungsfunktionen $f_{1/2}: X_{1} \times X_{2} \to \R$. 
+\item Der Zielfunktionswert soll minimiert werden (Anzahl der abzusitzenden Jahre). 
+\end{itemize}
+
+Vertikal: Spieler 1, horizontal: Spieler 2
+
+\begin{tabular}[h!]{l| c c}
+    & L & G \\\hline 
+  L & $f_{\nu}(L, L)$ & $f_{\nu}(L, G)$ \\ 
+  G &$ f_{\nu}(G, L)$ & $f_{\nu}(G, G)$ 
+\end{tabular}
+
+\vspace{3mm}
+
+$\nu = 1$: $f_{1}$
+\begin{tabular}[h!]{l| c c}
+    & L & G \\\hline 
+  L & 2 & 10 \\ 
+  G & 0 &  5 
+\end{tabular}
+
+$\nu = 2$: $f_{2}$
+\begin{tabular}[h!]{l| c c}
+    & L & G \\\hline 
+  L &  2& 0 \\
+  G & 10& 5
+\end{tabular}
+
+\vspace{3mm}
+
+Also gesamt: 
+\begin{tabular}[h!]{l| c c}
+    & L & G \\\hline 
+  L &  (2, 2)& (10, 0) \\
+  G & (0, 10)&  (5, 5)
+\end{tabular}
+
+ mit z.B. $(10, 0) = (f_{1}(L, G), f_{2}(L, G))$.
+
+Ändert nur ein Spieler seine Meinung nach zuvor 'fairem' Abkommen, so verschlechter sich seine Lage, die des anderen wird dagegen besser.
+\end{beispiel}
+\begin{beispiel} Kampf der Geschlechter
+
+Ein Paar plant einen gemeisamen Abend. Die Auswahl besteht zwischen Fußballspiel im Stadion, Theater (oder ihn doch getrennt verbringen). 
+
+Modellierung als Zwei-Personen-Spiel:
+\begin{itemize}
+\item Spieler 1 und 2 sind Mann und Frau. 
+\item $X_{1/2} = {F, T}$ mit $F$ für Fußball und $T$ für Theater. 
+\item Auszahlungsfunktionen $f_{\nu}: X_{1} \times X_{2} \to \R$
+
+Mann: vertikal, Frau vertikal
+
+  \begin{tabular}[h!]{l| c c}
+    & F & T \\\hline 
+    F & (2, 1)& (0, 0) \\
+    T & (0, 0)&  (1, 2)
+  \end{tabular}
+\item Das Ziel der Spieler ist es, ihre Auszahlung zu maximieren. 
+\item Eine Umentscheidung eines Spielers nach einem guten Einigung verschlechtert das Ergebnis für beide Spieler.
+\end{itemize}
+\end{beispiel}
+\begin{beispiel} Stein-Schere-Papier
+  Zwei Spieler haben zwischen Stein, Schere und Papier zu wählen. Papier schlägt Stein, Stein schlägt Schere und Schere schlägt Papier. Der Gewinner erhält einen Euro. Modellierung als Zwei-Personen-Spiel:
+  \begin{itemize}
+  \item $X_{1/2} = \set{R,P,S}$, die Auswahl besteht zwischen $R$ (rock), $P$ (paper) oder $S$ (scissor). 
+    \item Auszahlungsfunktionen;
+vertikal: Spieler 1, horizontal: Spieler 2
+
+  \begin{tabular}[h!]{l| c c c}
+    & R & S & P \\\hline 
+    R & (0, 0)& (1, -1) & (-1, 1) \\
+    S & (-1, 1)&  (0, 0)&  (1, -1)\\ 
+    P & (1, -1)&  (-1, 1)&  (0, 0)
+  \end{tabular}
+\item Jeder Spieler will seine Auszahlung maximieren.
+  \end{itemize}
+\end{beispiel}
+
+\begin{beispiel} Oligopol-Modell nach Cournot
+  
+Ein Produkt werde von $N$ Unternehmen hergestellt. Es wird angenommen, dass es keine weiteren Hersteller dieses Produktes gibt. Es werde mit $X_{\nu}$ die vom Unternehmen $\nu$ hergestellte Menge bezeichnet. Der auf dem Markt zu erziehlende Preis für eine Einheit des Produkts sei gegeben durch
+\begin{align*}
+  p(x_{1}, \dots, x_{N}) = b-(x_{1} + \dots + x_{N})
+\end{align*}
+mit einer Konstanten $b > 0$. Mit $K_{\nu}(x_{\nu})$ werden die Kosten zur Herstellung von $x_{\nu}$ Einheiten des Produkts durch Hersteller $\nu$ bezeichnet. Beispielsweise kann das sein:
+\begin{align*}
+  K_{\nu}(x_{\nu}) \coloneqq k \, x_{\nu} \\
+  K_{\nu}(x_{\nu}) \coloneqq k \, x_{\nu}^{2}
+\end{align*}
+mit festem $k > 0$. 
+
+Das Unternehmen möchte seinen Gewinn an Herstellung und Verkauf des Produktes maximieren. 
+
+Modellierung als $N$-Personen-Spiel: 
+\begin{itemize}
+\item Spieler $1, \dots, N$ sind die $N$ Unternehmen. 
+\item $x_{1} = x_{2} = \dots = x_{N} = [0, \infty)$ (eindimensionale Strategie: kleines $x$)
+\item Auszahlungsfunktionen:
+  \begin{align*}
+    f_{\nu}(x_{1}, \dots, x_{N}) \coloneqq x_{\nu}\cdot p(x_{1}, \dots, x_{N}) - K_{\nu}(x_{\nu})
+  \end{align*}
+\item Jeder Spieler will seinen Gewinn $f_{\nu}$ maximieren. 
+\end{itemize}
+\end{beispiel}
+\subsection{Nash-Gleichgewichte}
+Es sei $\Gamma = \set{f_{\nu}, X_{\nu}}_{\nu = 1}^{N}$ und $f_{\nu}$ soll maximiert werden für alle $\nu$. Ein Element aus $X_{\nu}$ werde mit $x^{\nu}$ bezeichnet (oder mit $x_{\nu}$, falls $X_{\nu} \subseteq \R$). Ferner sei
+\begin{align*}
+  x = (x_{1}, \dots, x_{N}) \in X_{1} \times \dots \times X_{N}.
+\end{align*}
+\begin{definition*}
+  Eine Strategiekombination $x^{*} = (x^{*, 1}, \dots, x^{*, N}) \in X$ heißt \markdef{Nash-Gleichgewicht} des Spiels $\Gamma$, wenn gilt, dass
+  \begin{align}\label{eq:nash}
+    f_{\nu}(x^{*}) \leq f_{\nu}(x^{*, 1}, \dots, x^{*, \nu-1}, x^{\nu}, x^{*, \nu+1}, \dots, x^{*, N}) \qquad \forall x^{\nu} \in X_{\nu}.
+  \end{align}
+Das Problem, ein Nash-Gleichgewicht (NGG) eines Spieles zu finden, wird als \markdef{Nash-Gleichgewichtsproblem} (Nash equilibrium problem, NEP) bezeichnet. Ein NGG $x^{*}$ ist also eine Strategiekombination, bei der sich keiner der Spieler verbessern kann, indem er \emph{als Einziger} von der Strategie $x^{*, \nu}$ abweicht. 
+\end{definition*}
+%\datum{16. April 2015}
+Bemerkungen:
+\begin{enumerate}
+\item Schreibweise $x = (x^{1}, \dots, x^{N}) = (x^{1}, \dots, x^{\nu-1}, x^{\nu}, \dots, x^{N})= (x^\nu, x^{-\nu})$, $x^{-\nu} =(x^{1}, \dots, x^{\nu-1}, x^{\nu+1}, \dots, x^{N}) $. Damit lässt sich \eqref{eq:nash} schreiben als
+  \begin{align*}
+    f_{\nu}(x^{*})\leq f_{\nu}(x^{\nu}, x^{*, -\nu}) 
+  \end{align*}
+für alle $x^{0} \in X_{\nu}$ oder 
+\begin{align*}
+      f_{\nu}(x^{*, \nu}, x^{*, -\nu})\leq f_{\nu}(x^{\nu}, x^{*, -\nu}) \forall x^{\nu} \in X_{\nu} 
+\end{align*}
+\item $x^{*} \in X$ ist offenbar genau dann ein NGG, wenn $x^{*, \nu}$ für $\nu = 1, \dots, N$ Lösung der folgenden OA ist:
+  \begin{align}\label{eq:ngg_equ}
+    f_{\nu}(x^{\nu}, x^{*, -\nu}) \to \min_{x^{\nu}} \qquad x^{\nu} \in X_{\nu}
+  \end{align}
+
+\end{enumerate}
+\begin{definition}
+  Für jedes $\nu = 1, \dots, N$ und jedes $x^{-\nu} \in X_{-\nu}\coloneqq \prod_{\eta = 1, \eta \neq \nu}^{N} X_{\eta}$ definieren wir durch
+  \begin{align*}
+    S_{\nu}(x^{-\nu}) \coloneqq \set{x^{\nu}\in X_{\nu}\setminus f_{\nu}(x^{\nu}, x^{-\nu}) \leq f_{\nu}(y^{\nu}, x^{-\nu}) \text{für alle} y^{\nu} \in X_{\nu}} 
+  \end{align*}
+die Menge der besten Antworten des Spielers $\nu$ auf die Strategiekombination $x^{-\nu}$ der Gegenspieler. Die mengenwertige Abbildung $x^{-\nu}\mapsto S_{\nu}(x^{-\nu})$ heißt Beste-Antwort-Funktion.
+\end{definition}
+\begin{satz}
+  Eine Strategiekombination $x^{*} \in X$ ist genau dann ein NGG des Spiels, wenn $x^{*}$ Fixpunkt der mengenwertigen Abbildung $x \mapsto S(x)$ ist, das heißt, wenn $x^{*} \in S(x^{*})$ gilt. 
+\end{satz}
+  \begin{beweis}
+Sei $x^{*} \in X$ beliebig gewählt. Unter Beachtung der Definition des NGG sowie der Mengen $S_{\nu}(x^{*, - \nu})$ und $S(x^{*})$ ergibt sich 
+
+$x^{*}$ ist NGG $\iff$
+\begin{align*}
+  \forall \nu \in \set{1, \dots, N} \forall x^{\nu}\in X_{\nu}: \, f_{\nu}(x^{*, \nu}, x^{*, -\nu})\leq f_{\nu}(x^{\nu}, x^{*, -\nu}) \iff \forall \nu \in \set{1, \dots, N}: \, x^{*, \nu}\in S_{\nu}(x^{*, -\nu}) \iff x^{*} \in S(x^{*}).
+\end{align*}
+\end{beweis}
+
+\begin{beispiel*}Fortsetzung
+
+  \begin{itemize}
+  \item Gefangenendilemma: NGG: $x^{*} = (G, G)^{T}$
+  \item Fußball vs. Theater: NGG $x^{*} \in \set{(F, F)^{T}, (T, T)^{T}}$
+  \item Stein, Schere, Papier: es gibt kein NGG
+  \item Sei $N = 2$ (Duopol), $K_{\nu}(x_{\nu}) = k x_{\nu}^{2}$ mit $k > 0 $ fest, $p(x_{1}, x_{2} = b - (x_{1} + x_{2}))$ mit $b > 0$ fest.
+    \begin{align*}
+      f_{\nu}(x_{1}, x_{2}) = x_{\nu}(b - x_{1}- x_{2}) - k x_{\nu}^{2}
+    \end{align*}
+für $\nu = 1,2$. Sei zunächst $x_{2} \in X_{2} \in [0, \infty)$ gegeben. Wir ermitteln nun $S_{1}(x_{2})$. Dazu ist $f_{1}(x_{1}, x_{2}) \max_{x_{1}}$ zu lösen bei $x_{1} \in [0, \infty)$.
+\begin{align}\label{eq:h_opt}
+  h_{1}(x_{1}, x_{2}) = - (k + 1)x_{1}^{2} + x_{1}(b - x_{2}) \to \max_{ x_{1}} \in [0, \infty). 
+\end{align}
+Falls $x_{2} \geq b$, so ist $S_{1}(x_{2}) = \set 0$. Falls $x_{2} < b$ dann ist $\frac {\pd h(x_{1}, x_{2})}{\pd x_{1}} = 0$ notwendig und hinreichend für Optimalität, das heißt
+\begin{align*}
+&  - 2 x_{1}(k + 1) + b - x_{2} = 0\\
+&  \frac{b - x_{2}}{2(k + 1)} = x_{1}
+\end{align*}
+also $S_{1}(x_{2}) = \set{ \frac{b - x_{2}}{2(k + 1)} = x_{1}}$ und zusammenfassend
+\begin{align*}
+&  S_{1}(x_{2}) =
+  \begin{cases}
+    \set 0 & x_{2}\geq b \\
+     \set{\frac{b - x_{2}}{2(k + 1)}} & x_{2}< b
+  \end{cases}\\
+  S_{2}(x_{1}) =
+  \begin{cases}
+    \set 0 & x_{1}\geq b \\
+     \set{\frac{b - x_{1}}{2(k + 1)}} & x_{1}< b
+  \end{cases}.
+\end{align*}
+Nach Satz 1.1 muss für ein NGG $x^{*}$ gelten, dass $x^{*} \in S(x^{*})$, das heißt $x_{1}^{*} \in S_{1}(x_{2}^{*})$, $x_{2}^{*} \in S_{2}(x_{1}^{*})$. Angenommen, es sei $x_{1}^{*}\geq b$. Dann folgt $S_{2}(x_{1}^{*}) = \set 0$, $S_{1}(0) = \set{\frac{b}{2(k + 1)}}$, $\frac b {2(k + 1)}< b$. Das ist ein Widerspruch zu $x_{1}^{*}\geq b$ ($x_{2}^{*} \geq b$ analog).
+Sei nun $x_{1}<b$ und $x_{2}<b$. Man versucht nun eine Lösung $(x_{1}^{*}, x_{2}^{*})$ des folgenden Systems zu finden:
+\begin{align*}
+  x_{1} = \frac{b-x_{2}}{2(k + 1)}\\
+  x_{2} = \frac{b-x_{1}}{2(k + 1)}.
+\end{align*}
+Es gibt genau eine Lösung $(x_{1}^{*}, x_{2}^{*}) = \left(\frac{b}{2k + 3}, \frac{b}{2k + 3} \right)$
+  \end{itemize}
+\end{beispiel*}
+\subsection{Dominierte und dominante Strategien}
+\begin{definition}
+  Eine Strategie $x^{\nu} \in X_{0}$ \markdef{dominiert} eine Strategie $y^{\nu} \in X_{\nu}$ des Spielers $\nu$, wenn für alle $x^{-\nu} \in X_{-\nu}$ die Ungleichung
+  \begin{align*}
+    f_{\nu}(x^{\nu}, x^{-\nu})\leq f_{\nu}(y^{\nu}, x^{-\nu})
+  \end{align*}
+erfüllt ist. Äquivalent sagt man, die Strategie $y^{\nu}$ wird von der Strategie $x^{\nu}$ dominiert. Eine Strategie $x^{\nu} \in X_{\nu}$ heißt dominant für den Spieler $\nu$, wenn sie jede andere Strategie dieses Spielers dominiert. Eine Strategiekombination $x^{*} \in X$ heißt \markdef{Gleichgewicht in dominanten Strategien}, wenn für jeden Spieler $\nu = 1, \dots, N$ die Strategie $x^{*, \nu}$ dominant ist, wenn also für alle $\nu = 1, \dots, N$ gilt:
+\begin{align*}
+  f_{\nu}(x^{*, \nu}, x^{-\nu}) \leq f_{\nu}(x^{\nu}, x^{-\nu}) \quad \forall x = (x^{\nu}, x^{-\nu}) \in X. 
+\end{align*}
+\end{definition}
+\begin{satz}
+  Eine Strategie $\bar x^{\nu} \in X_{\nu}$ ist dominant für den Spieler $\nu$ genau dann, wenn $\bar x^{\nu} \in S_{\nu}(x^{- \nu})$ für alle $x^{-\nu} \in X_{- \nu}$, wenn also $x^{-\nu}$ die beste Antwort auf jede mögliche Strategiekombination der Gegenspieler ist. Eine Strategiekombination $x^{*} \in X$ ist genau dann ein GG in dominanten Strategien, wenn $x^{*} \in S(x)$ für alle $x \in X$.  
+\end{satz}
+%\datum{20. April 2015}
+\begin{beispiel}
+Zwei Spieler drücken Knöpfe.
+vertikal: Spieler 1, horizontal: Spieler 2
+
+  \begin{tabular}[h!]{l| c c c}
+    & blau & rot  \\\hline 
+    blau & (2, 1)& (9, 0) \\
+    rot & (1, 0)&  (9, 8)
+  \end{tabular}  
+
+Ziel: maximale Auszahlung.
+\begin{itemize}
+\item Die blaue Strategie dominiert für Spieler 1 die rote, denn der Auszahlungsbetrag der roten ist kleiner oder gleich der blauen. Also streicht er die rote Strategie. 
+\item Spieler 2 besitzt ursprünglich keine dominierte Strategie. Nach Streichung der Strategie 'rot' für Spieler 1 dominiert die blaue Strategie die rote bei Spieler 2. Folglich kann er die Strategie 'rot' streichen. \item Es ergibt sich die Kombination (blau, blau). Diese ist ein Nash-Gleichgewicht, das ist kein Zufall. 
+\end{itemize}
+\end{beispiel}
+\begin{satz}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+  \begin{enumerate}
+  \item Ein Gleichgewicht in dominanten Strategien ist auch ein Nash-Gleichgewicht. 
+\item Falls nach einer endlichen Anzahl von Eliminationen von dominierten Strategien genau eine Strategiekombination übrig bleibt, so ist diese ein Nash-Gleichgewicht. 
+  \end{enumerate}
+\end{satz}
+\begin{beweis}
+  Übung.
+\end{beweis}
+\begin{bemerkung*}
+  Im Allgemeinen ist ein NGG kein GG in dominanten Strategien. Es kann NGGs auch in dominierten Strategien geben (oben (rot, rot)). 
+\end{bemerkung*}
+\subsection{Klassifikation von Spielen}
+\begin{definition*}
+  Ein Spiel $\Gamma=\set{f_{\nu}, X_{\nu}}_{\nu = 1}^{N}$ heißt
+  \begin{itemize}
+  \item \markdef{endlich}, wenn alle $X_{\nu}$ höchstens endlich viele Elemente besitzen, 
+  \item \markdef{abzählbar}, wenn alle $X_{\nu}$ höchstens abzählbar viele Elemente enthalten. 
+  \end{itemize}
+\item \markdef{überabzählbar} oder \markdef{kontinuierlich}, wenn mindestens eine Strategiemenge überabzählbar viele Elemente besitzt. 
+\end{definition*}
+\begin{definition*}
+  Ein Spiel $\Gamma$ heißt \markdef{Nullsummenspiel}, wenn für alle $x \in X$
+  \begin{align*}
+    \sum_{\nu = 1}^{N} f_{\nu}(x) = 0.
+  \end{align*}
+Sonst heißt es \markdef{Nullsummenspiel}. 
+\end{definition*}
+ Endliche \markdef{Zwei-Personen-Spiele} heißen auch \markdef{Bi-Matrix-Spiele}. Seien $x_{1}, \dots, x_{m}$ die Strategien von Spieler 1 und $y_{1}, \dots, y_{n}$ die Strategien von Spieler 2. Dann lassen sich die Auszahlungsfunktionen $f_{1/2}$ vollständig durch die Matrizen
+ \begin{align*}
+&   A \coloneqq \left(f_{1}(x_{i},y_{j}) \right)_{ij} \in \R^{m \times n} \quad \text{und}\\
+&   B \coloneqq \left(f_{2}(x_{i},y_{j}) \right)_{ij} \in \R^{m \times n}
+ \end{align*}
+beschrieben werden. In endlichen Zwei-Personen-Nullsummenspielen gilt $B = -A$, sodass dann die Matrix $A$ zur Beschreibung des Spiels genügt. Endliche Zwei-Personen-Spiele heißen auch \markdef{Matrix-Spiele}.
+\begin{itemize}
+\item Kooperative Spiele vs. \markdef{nicht-kooperative} Spiele (Absprachen in kooperativen Spielen sind bindend)
+\item \emph{statische} vs. dynamische Spiele (dynamische sind zeitabhängig)
+\item Spiele mit \emph{vollständiger} vs. unvollständiger Information
+\end{itemize}

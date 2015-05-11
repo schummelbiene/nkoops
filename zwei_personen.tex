@@ -1,0 +1,313 @@
+\section{Zwei-Personen-Nullsummenspiele}
+Sei nun $\Gamma = \set{f_{1}, f_{2}, X_{1}, X_{2}}$ mit $f_{2}(x) = -f_{1}(x)$ für alle $x \in X = X_{1} \times X_{2}$. Es werde $f_{1}$ mit $f$ und $f_{2}$ mit $-f$ bezeichnet. Anstelle von $\Gamma$ wie oben schreiben wir $\Gamma = \set{f, X_{1}, X_{2}}$. Ziel von Spieler 1 ist es, $f$ zu minimeren und von Spieler 2, $f$ zu maximieren.   
+\begin{definition*}
+  Eine Strategiekombination $x^{*} = (x^{*, 1}, x^{*, 2}) \in X $ heißt \markdef{Sattelpunkt} von $f$, falls gilt
+  \begin{align*}
+    f(x^{*, 1}, x^{2}) \leq f(x^{*, 1}, x^{*, 2}) \leq f(x^{1}, x^{*, 2})
+  \end{align*}
+für alle $x=(x^{1}, x^{2}) \in X$.  
+\end{definition*}
+\begin{satz}\label{thm:NGG_saddlepoint}
+  Eine Strategiekombination $x^{*} \in X$ ist genau dann ein NGG des Zwei-Personen-Nullsummenspiels $\Gamma = \set{f, X_{1}, X_{2}}$, wenn $x^{*}$ ein Sattelpunkt von $f$ ist. (Beweis: klar.)
+\end{satz}
+\begin{beispiel} Spieler 1: senkrecht, Spieler 2: waagrecht. 
+
+  \begin{tabular}[h!]{l|c c}
+    &1 & 6 \\\hline
+    1 & - 3 & 2\\
+    2 & - 2 & 1\\
+    7 & 3 & -2\\
+  \end{tabular}
+
+$X_{1} = \set {1, 2, 7}$, $X_{2} = \set{1, 6}$ $f (x_{1}, x_{2}) = \norm{x_{1} - x_{2}} -3$ soll bezüglich $x_{1}$ minimiert oder bezüglich $x_{2}$ maximiert werden.
+
+Dieses Spiel besitzt kein NGG. Welche Strategien sollen Spieler 1 und 2 wählen?
+\begin{itemize}
+\item Verlustvermeidungsstrategie für Spieler 1:
+  \begin{align*}
+    \max_{x_{2}} f(x_{1}, x_{2}) \to \min_{x_{1}} \quad \text{bei } x_{1} \in X_{1}
+  \end{align*}
+Er sollte also Strategie '2' wählen. Der maximale Verlust von Spieler 1 ist dann
+\begin{align*}
+  \min_{x_{1} \in X_{1}}\max_{x_{2} \in X_{2}} f(x_{1}, x_{2}) = f(2, 6) = 1
+\end{align*}
+\item Spieler 2:
+  \begin{align*}
+    &\min_{x_{1} \in X_{1}} f(x_{1}, x_{2}) \to \max_{x_{2}} \quad \text{bei }x_{2} \in X_{2}. \\
+    &\max_{x_{2} \in X_{2}}\min_{x_{1} \in X_{1}} f(x_{1}, x_{2}) = f(7, 6) = -2
+  \end{align*}
+Spieler 2 verliert dabei (Strategie '6') also maximal 2 ('-2 ist der minimale Gewinn').
+\end{itemize}
+\end{beispiel}
+\begin{voraussetzung}\label{ass:existence} Die folgenden Bedingungen sind erfüllt:
+  \begin{enumerate}
+  \item Für jedes $x^{1} \in X_{1}$ existiert ein $\hat x^{2} \in X_{2}$, sodass
+    \begin{align*}
+      f(x^{1}, \hat x^{2}) = \max_{x^{2} \in X^{2}}f(x^{1}, x^{2})
+    \end{align*}
+existiert. 
+\item Für jedes $x^{2} \in X_{2}$ existiert ein $\hat x^{1} \in X_{1}$, sodass
+   \begin{align*}
+      f(\hat x^{1}, x^{2}) = \min_{x^{1} \in X^{1}}f(x^{1}, x^{2})
+    \end{align*}
+existiert. 
+\item Ferner exisiteren die Ausdrücke $\max_{x^{2} \in X_{2}}\min_{x^{1} \in X^{1}}f(x^{1}, x^{2})$ und $\min_{x^{1} \in X_{1}}\max_{x^{2} \in X^{2}}f(x^{1}, x^{2})$.
+  \end{enumerate}
+\end{voraussetzung}
+\begin{bemerkung*}
+  Voraussetzung \ref{ass:existence} sind erfüllt, wenn
+  \begin{itemize}
+  \item die Strategiemengen $X_{1/2}$ endlich sind oder
+  \item $X_{1/2}$ kompakte Teilmengen eines B-Raumes sind und $f$ stetig auf $X_{1} \times X_{2}$ ist.  
+  \end{itemize}
+\end{bemerkung*}
+\begin{lemma}\label{lem:minmax}
+  Es sei Voraussetzung \ref{ass:existence} erfüllt. Dann gilt
+  \begin{align*}
+    \max_{x^{2} \in X_{2}} \min_{x^{1} \in X_{1}} f(x^{1}, x^{2}) \leq \min_{x^{1} \in X_{1}} \max_{x^{2} \in X_{2}} f(x^{1}, x^{2})
+  \end{align*}
+\end{lemma}
+%\datum{27. April 2015}
+\begin{beweis}
+  Wegen Voraussetzung \ref{ass:existence} gibt es $\bar x^{2} \in X_{2}$, sodass
+  \begin{align*}
+    \min_{x^{1} \in X_{1}}f(x^{1}, \bar x^{2}) = \max_{x^{2} \in X_{2}}\min_{x^{1} \in X_{1}}f(x^{1}, x^{2})
+  \end{align*}
+und es existiert $\bar x^{1} \in X_{1}$, sodass
+\begin{align*}
+    \max_{x^{2} \in X_{2}}f(\bar x^{1}, x^{2}) = \min_{x^{1} \in X_{1}}\max_{x^{2} \in X_{2}} f(x^{1}, x^{2}).
+\end{align*}
+Damit folgt
+\begin{align*}
+  \max_{x^{2} \in X_{2}}\min_{x^{1} \in X_{1}}f(x^{1}, x^{2}) &= \min_{x^{1} \in X_{1}}f(x^{1}, \bar x^{2})\\
+&\leq f(\bar x^{1}, \bar x^{2})\\
+&\leq  \max_{x^{2} \in X_{2}}f(\bar x^{1}, x^{2})\\
+&=\min_{x^{1} \in X_{1}}\max_{x^{2} \in X_{2}} f(x^{1}, x^{2}).
+\end{align*}
+\end{beweis}
+\begin{bemerkung*}
+  Die in Lemma \ref{lem:minmax} auftretenden Größen
+  \begin{align*}
+    &\ubar v \coloneqq \max_{x^{2} \in X_{2}}\min_{x^{1} \in X_{1}} f(x^{1}, x^{2})\\
+    &\bar v \coloneqq \min_{x^{1} \in X_{1}}\max_{x^{2} \in X_{2}} f(x^{1}, x^{2})
+  \end{align*}
+heißen \markdef{unterer Spielwert} und \markdef{oberer Spielwert} des Zwei-Personen-Nullsummenspiels.
+\end{bemerkung*}
+\begin{satz}
+  Es sei Voraussetzung \ref{ass:existence} erfüllt. Dann besitzt das Spiel genau dann ein NGG, wenn der untere und der obere Spielwert übereinstimmen. 
+\end{satz}
+\begin{beweis}
+  Sei $x^{*}$ ein NGG. Dann ist $x^{*}$ auch ein Sattelpunkt von $f$, sodass für alle $x^{1} \in X_{1}$ und $x^{2} \in X_{2}$ 
+  \begin{align*}
+    f(x^{*, 1}, x^{2}) \leq f(x^{*})\leq f(x^{1}, x^{*, 2})
+  \end{align*}
+gilt. Dann folgt
+\begin{align*}
+    \max_{x^{2} \in X_{2}} f(x^{*, 1}, x^{2})  = f(x^{*,1}, x^{*, 2}) = \min_{x^{1} \in X_{1}} f(x^{1}, x^{*,2})
+\end{align*}
+und weiter
+\begin{align*}
+  \bar v = \min_{x^{1} \in X_{1}}\max_{x^{2} \in X_{2}} f(x^{1}, x^{2}) \leq  \max_{x^{2} \in X_{2}}  \min_{x^{1} \in X_{1}}f(x^{1}, x^{2}) = \ubar v.
+\end{align*}
+Zusammen mit Lemma \ref{lem:minmax} erhalten wir $\bar v = \ubar v$.
+\vspace{5mm}
+
+Umgekehrt gelte nun $\bar v = \ubar v$, das heißt
+\begin{align}\label{eq:minmax}
+  \max_{x^{2} \in X_{2}} \min_{x^{1} \in X_{1}}f(x^{1}, x^{2}) = \min_{x^{1} \in X_{1}} \max_{x^{2} \in X_{2}}f(x^{1}, x^{2}).
+\end{align}
+Sei $x^{*,1} \in X_{1}$ derart, dass 
+\begin{align*}
+\max_{x^{2} \in X_{2}}f(x^{*,1}, x^{2}) = \min_{x^{1} \in X_{1}} \max_{x^{2} \in X_{2}}f(x^{1}, x^{2})
+\end{align*}
+ und analog sei $x^{*,2} \in X_{2}$ derart, dass 
+ \begin{align*}
+   \min_{x^{1} \in X_{1}}f(x^{1}, x^{*,2}) = \min_{x^{1} \in X_{1}} \max_{x^{2} \in X_{2}}f(x^{1}, x^{2}).
+ \end{align*}
+Wegen \eqref{eq:minmax} gilt dann
+\begin{align*}
+f(x^{*, 1}, x^{*, 2})\leq \max_{x^{2} \in X_{2}}f(x^{*,1}, x^{2}) = \min_{x^{1} \in X_{1}}f(x^{1}, x^{*,2})\leq f(x^{*, 1}, x^{*, 2}), 
+\end{align*}
+also Gleichheit. Es folgt 
+\begin{align*}
+  f(x^{*, 1}, x^{2}) \leq f(x^{*}) \leq f(x^{1}, x^{*, 2})  
+\end{align*}
+für alle $x^{1} \in X_{1} $ und $x^{2} \in X_{2}$. Daher ist $x^{*}$ ein Sattelpunkt und nach Satz \ref{thm:NGG_saddlepoint} ein NGG.
+\end{beweis}
+\begin{definition*}
+  Stimmen oberer und unterer Spielwert überein, dann heißt $v \coloneqq \bar v = \ubar v$ \markdef{Wert} des Spiels. Das Spiel heißt \markdef{fair}, wenn $v = 0$. 
+\end{definition*}
+\begin{korollar}
+  Es sei Voraussetzung \ref{ass:existence} erfüllt. Ist $x^{*}$ ein NGG, dann gilt $f(x^{*}) = \ubar v = \bar v = v$. 
+\end{korollar}
+
+\subsection{Matrixspiele und ihre gemischten Erweiterungen}
+\label{sec:matrixspiele}
+
+Für ein Matrixspiel $\Gamma= \set{f, X_{1}, X_{2}}$ seien die Strategiemengen durch $X_{1} = \set{1, \dots, m}$ und $X_{2} = \set{1, \dots, n}$ gegeben. Die Funktion $f$ kann mithilfe einer Matrix $A = (a_{ij}) \in \R^{m \times n}$ vollständig beschrieben werden durch
+\begin{align*}
+  a_{ij} \coloneqq f(i, j), \qquad i = 1, \dots, m, \quad j = 1, \dots , n.
+\end{align*}
+Diese Matrix heißt auch \markdef{Auszahlungsmatrix}.
+\begin{satz}
+  Es gilt:
+\enu{\alph}
+  \begin{enumerate}
+  \item $(i^{*}, j^{*})\in X_{1} \times X_{2}$ ist genau dann ein NGG, wenn
+    \begin{align}\label{eq:NGG_matrix}
+      a_{i^{*}, j} \leq a_{i^{*}, j^{*}} \leq a_{i, j^{*}}, \qquad \forall i = 1, \dots, m, \quad \forall j = 1, \dots, n
+    \end{align}
+\item Ein Matrixspiel besitzt genau dann ein NGG, wenn
+  \begin{align*}
+    \max_{j = 1, \dots, n} \min_{i = 1, \dots, m} a_{ij} = \min_{i = 1, \dots, m} \max_{j = 1, \dots, n} a_{ij} 
+  \end{align*}
+  \end{enumerate}
+\end{satz}
+\begin{beweis}
+  Folgt direkt aus Satz \ref{thm:NGG_saddlepoint} und Lemma\ref{lem:minmax}. 
+\end{beweis}
+
+\begin{definition*}
+  Sei $\Gamma = \set{f, X_{1}, X_{2}}$ ein Matrixspiel mit $X_{1} = \set{1, \dots, m}$ und $X_{2} = \set{1, \dots, n}$ und die Auszahlungsfunktion sei $f$, die mithilfe der Auszahlungsmatrix $A$ beschrieben werde. Unter der \markdef{gemischten Erweiterung} des Matrixspiels $\Gamma$ versteht man das Nullsummenspiel $\hat \Gamma = \set{\hat f, \hat X_{1}, \hat X_{2}}$ mit
+  \begin{align*}
+    \hat X_{1} &\coloneqq \set{x \in \R^{m}_{0, +} |\,\sum_{i = 1}^{m}x_{i} = 1}\\
+    \hat X_{2} &\coloneqq \set{y \in \R^{n}_{0, +} |\,\sum_{j = 1}^{n}y_{j} = 1}\\
+ \hat f:\, &\hat X_{1} \times \hat X_{2} \to \R \\
+&(x, y) \mapsto \sum_{i = 1}^{m} \sum_{j = 1}^{n} x_{i}y_{i}\underbrace{f(i, j)}_{a_{ij}} = x^{T}Ay
+  \end{align*}
+\end{definition*}
+\begin{bemerkung*}
+  Die kanonischen Einheitsvektoren in $\hat X_{1}$ und $\hat X_{2}$ werden als \markdef{reine Strategien} bezeichnet. Sie repräsentieren die Strategien des Matrixspiels $\Gamma$. 
+\end{bemerkung*}
+\begin{itemize}
+\item $(x^{*}, y^{*}) \in \hat X_{1} \times \hat X_{2}$ ist genau dann NGG, falls
+  \begin{align*}
+    (x^{*})^{T} Ay \leq     (x^{*})^{T} Ay^{*} \leq     x^{T} Ay^{*}
+  \end{align*}
+für alle $x \in \hat X_{1}$, $y \in \hat X_{2}$
+\item Ist $(x^{*}, y^{*}) \in \hat X_{1} \times \hat X_{2}$ NGG von $\hat \Gamma$, dann gilt
+  \begin{align*}
+    (x^{*})^{T} Ay^{*} = \min_{x \in X_{1}} \max_{y \in X_{2}} x^{T}A y =  \max_{y \in X_{2}} \min_{x \in X_{1}}x^{T}A y = 
+  \end{align*}
+\end{itemize}
+%\datum{30. April 2015} fehlt!
+%\datum{04. Mai 2015}
+\begin{align*}
+  T(x, y) &\coloneqq \left( \frac 1 {1 + \sum_{i = 1}^{m}\Phi_{i}(x, y)}\left(x + \sum_{i = 1}^{m}\Phi_{i}(x, y)e^{i}\right), \frac 1 {1 + \sum_{j = 1}^{n}\Psi_{j}(x, y)}\left(y + \sum_{j = 1}^{n}\Psi_{j}(x, y)e^{j}\right)\right)\\
+\Phi_{i} (x, y) &= \max {0, x^{T}Ay-(Ay)_{i}}\\
+\Psi_{j} (x, y) &= \max {0, x^{T}By-(Bx)_{j}}
+\end{align*}
+\begin{beweis}
+  Sei $(x^{*}, y^{*})$ ein NGG von $\hat \Gamma$. Dann gilt nach Definition:
+  \begin{align*}
+    &(x^{*})^{T}A y^{*} \leq x^{T}Ay^{*}, \quad \forall x \in \hat X_{1}\\
+    &(x^{*})^{T}A y^{*} \leq (x^{*})^{T}By, \quad \forall y \in \hat X_{2}
+  \end{align*}
+Setzen wir für $x$ bzw. $y$ die Einheitsvektoren des $\R^{m}$ bzw. $\R^{n}$ ein, so folgt
+\begin{align*}
+&(x^{*})^{T}A y^{*} \leq (Ay^{*})_{i}, \quad \forall i \in \set{1, \dots m}\\
+&(x^{*})^{T}A y^{*} \leq (B^{T}x^{*})_{j}, \quad \forall j \in \set{1, \dots, n}
+\end{align*}
+Dann folgt $\Phi_{1}(x^{*}, y^{*}) = 0$ für $i = 1,\dots, m$ und $\Psi_{j}(x^{*}, y^{*}) = 0$ für $j = 1, \dots, n$, sodass sich dann $T(x^{*},y^{*}) = (x^{*}, y^{*})$ durch Einsetzen ergibt. 
+
+Sei nun $ (x^{*}, y^{*})$ ein Fixpunkt von $T$. Dann gilt insbesondere
+\begin{align}\label{eq:star_x}
+&  x^{*} = \frac 1 {1 + \sum_{i = 1}^{m}\Phi_{i}(x^{*}, y^{*})}\left(x^{*} + \sum_{i = 1}^{m}\Phi_{i}(x^{*}, y^{*})e^{i}\right)\notag\\
+&x^{*} + \sum_{i = 1}^{m}\Phi_{i}(x^{*}, y^{*})x^{*} =x^{*} + \sum_{i = 1}^{m}\Phi_{i}(x^{*}, y^{*})e^{i}\notag \\
+&\sum_{i = 1}^{m}\Phi_{i}(x^{*}, y^{*})x^{*} =\sum_{i = 1}^{m}\Phi_{i}(x^{*}, y^{*})e^{i} = (\Phi_{1}(x^{*}, y^{*}), \dots, \Phi_{m}(x^{*}, y^{*}))^{T}, 
+\end{align}
+Wegen $x^{*} \in \hat X_{1}$ ist $x^{*} \neq 0$. Es sei der Index $I_{0} \in \set{1, \dots, m}$ so gewählt, dass $x_{i_{0}}^{*} \neq 0$ und $(Ay^{*})_{i_{0}}\geq (Ay^{*})_{i}$ für alle $i$ mit $x^{*}_{i} \neq 0$. Dann folgt
+\begin{align*}
+  (Ay^{*})_{i_{0}} = \sum_{i = 1}^{m}x_{i}^{*}(Ay^{*})_{i_{0}} = \sum_{i = 1, x_{i}^{*}\neq 0}^{m} x_{i}^{*}(Ay^{*})_{i_{0}} \geq \sum_{i = 1}^{m} x_{i}^{*}(Ay^{*})_{i} = (x^{*})^{T}Ay^{*}.
+\end{align*}
+Daraus ergibt sich $\Phi_{i_{0}}(x^{*}, y^{*}) = 0$. Die $i_{0}$-te Zeile von \eqref{eq:star_x} liefert $\sum_{i = 1}^{m}\Phi_{i}(x^{*}, y^{*})x_{i_{0}} = 0$. Da $x_{i_{0}}^{*} \neq 0$ und $\Phi_{i}(x^{*}, y^{*})\geq 0$ für alle $i = 1, \dots, m$, so folgt $\Phi_{i}(x^{*}, y^{*}) = 0$ für alle $i = 1, \dots, m$. Das impliziert
+\begin{align*}
+  (Ay^{*})_{i} \geq (x^{*})^{T}Ay^{*}
+\end{align*}
+für alle $i = 1, \dots, m$ und somit für beliebiges $x \in \hat X_{1}$:
+\begin{align*}
+  x^{T}Ay^{*} = \sum_{i = 1}^{m} x_{i}(Ay^{*})_{i}\geq\sum_{i = 1}^{m} x_{i}(x^{*})^{T}Ay^{*} = (x^{*})^{T}Ay^{*}.
+\end{align*}
+Analog kann $(x^{*})^{T}By \geq (x^{*})^{T}By^{*}$ für alle $y \in \hat X_{2}$ gezeigt werden. Also ist $(x^{*}, y^{*})$ ein NGG von $\hat \Gamma$. 
+\end{beweis}
+\begin{satz}(Fixpunktsatz von Brouwer)
+
+Sei $X \subset \R^{n}$ eine nichtleere, konvexe, kompakte Menge sowie $f: X \to X$ stetig. Dann besitzt $f$ einen Fixpunkt in $X$.
+\end{satz}
+\begin{korollar}
+  Es seien $\Gamma = \set{f_{1}, f_{2}, X_{1}, X_{2}}$ ein Bi-Matrix-Spiel und $\hat\Gamma = \set{\hat f_{1},\hat f_{2},\hat X_{1},\hat X_{2}}$ seine gemischte Erweiterung. Dann besitzt $\hat\Gamma$ mindestens ein NGG.
+\end{korollar}
+\begin{beweis}
+  Sei $X \coloneqq \hat X_{1} \times \hat X_{2}$
+  \begin{align*}
+T(x, y) &\coloneqq  \frac 1 {1 + \sum_{i = 1}^{m}\Phi_{i}(x, y)}\left(x_{i} + \sum_{i = 1}^{m}\Phi_{i}(x, y)e^{i}\right)\\
+&= \frac 1 {1 + \sum_{i = 1}^{m}\Phi_{i}(x, y)}\left(1 + \sum_{i = 1}^{m}\Phi_{i}(x, y)e^{i}\right) = 1
+  \end{align*}
+Die Abbildung $T$ bildet tatsächlich jedes $(x, y) \in X$ nach $T(x, y) \in X$ ab. $T$ ist stetig und $X$ ist nichtleer, konvex und kompakt. Also liefern Satz 2.10 und Lemma 2.9 die Behauptung.
+\begin{figure}[h!]
+  \centering
+  \include{2_pic}
+  \caption{Veranschaulichung}
+  \label{fig:pic}
+\end{figure}
+\end{beweis}
+
+Wir betrachten nun ein quadratisches Optimierungsproblem:
+\begin{align}\label{eq:quadr_prob}
+q(x, y, v, w)&  x^{T}Ay + x^{T}By - v-w \to \min_{x, y, v, w}\\
+&Ay \geq ve, B^{T}x \geq we, e^{T}x = 1, e^{T}y = 1, x\geq 0, y\geq 0. \notag
+\end{align}
+\begin{satz}
+  Es gelten folgende Aussagen:
+  \begin{enumerate}
+  \item Für jeden zulässigen Punkt $(x, y, v, w)$ von \eqref{eq:quadr_prob} gilt $q(x, y, v, w)\geq 0$. 
+  \item Ist $(x^{*}, y^{*})$ ein NGG von $\hat \Gamma = \set{\hat f_{1}, \hat f_{2}, \hat X_{1}, \hat X_{2}}$, so ist $(x^{*}, y^{*}, v^{*}, w^{*})$ mit $v^{*}\coloneqq (x^{*})^{T}Ay^{*}$ und $w^{*} \coloneqq (x^{*})^{T}By^{*}$ eine Lösung von \eqref{eq:quadr_prob}.
+\item Problem \eqref{eq:quadr_prob} ist lösbar und der optimale Zielfunktionswert ist gleich $0$. 
+  \end{enumerate}
+\end{satz}
+\begin{beweis}
+  \begin{enumerate}
+  \item  Sei $(x, y, v, w)$ zulässig für \eqref{eq:quadr_prob}. Dann gilt
+  \begin{align*}
+&    x^{T}Ay \geq x^{T}(ve) = vx^{T}e = v, \\
+&    x^{T}By \geq (xB^{T})^{T}y = we^{T}y = w, 
+  \end{align*}
+und damit $q(x, y, v, w)\geq 0$. 
+\item Sei $(x^{*}, y^{*})$ ein NGG und seien $v^{*}$ und $w^{*}$ gemäß der Angabe definiert. Dann gilt offenbar $q(x^{*}, y^{*}, v^{*}, w^{*}) = 0$. Nun wird noch gezeigt, dass $(x^{*}, y^{*}, v^{*}, w^{*})$ zulässig für \eqref{eq:quadr_prob} ist. Da $x^{*} \in \hat X_{1}, y^{*} \in \hat X_{2}$ ist bleibt nur noch $Ay^{*} \geq v^{*}e$ und $B^{T}x^{*} \geq w^{*}e$ zu zeigen. Da  $(x^{*}, y^{*})$ ein NGG ist, gilt
+  \begin{align*}
+v^{*}= (x^{*})^{T}Ay^{*} \leq x^{T}Ay^{*} \quad \forall x \in \hat X_{1}, 
+  \end{align*}
+speziell für $x = e^{i} \in \R^{m}$ ergibt sich daraus $v^{*}\leq (Ay^{*})_{i}$ und somit $Ay^*\geq v^{*}e$. Analog zeigt man $B^{T}x^{*} \geq w^{*}e$. Also ist $(x^{*}, y^{*}, v^{*}, w^{*})$ zulässig für \eqref{eq:quadr_prob}. Wegen $q (x^{*}, y^{*}, v^{*}, w^{*}) = 0$ und Teil 1. folgt 2.
+\item Nach Korollar 2.11 besitzt $\hat\Gamma$ stets ein NGG, welches nach Teil 2 eine Lösung von \eqref{eq:quadr_prob} liefert, wobei der zugehörige Funktionswert von $q$ gleich $0$ ist (vergleiche 2.).
+  \end{enumerate}
+\end{beweis}
+\begin{satz}
+Es sei $(x^{*}, y^{*}, v^{*}, w^{*})$ eine Lösung von \eqref{eq:quadr_prob}. Dann gilt: $v^{*} = (x^{*})^{T} Ay^{*}$ und $w^{*} = (x^{*})^{T} By^{*}$ und $(x^{*}, y^{*})$ ist ein NGG von $\hat\Gamma$.
+\end{satz}
+%\datum{11. Mai 2015}
+\begin{beweis}
+Beweis von Satz 2.13: Aus Teil (c) des Satzes 2.12 wissen wir, dass $q(x*, y^{*}, v^{*}, w^{*}) = 0$ ist, dass also gilt:  
+\begin{align}\label{eq:equality}
+  (x*)^{T}Ay^{*} + (x^{*})^{T}By^{*} =  v^{*}+ w^{*}.
+\end{align}
+Andererseits folgt aus den Nebenbedingungen von \eqref{}, dass
+\begin{align*}
+  (x^{*})^{T}Ay^{*} \geq v^{*}\cdot e^{T}x^{*} = v^{*}
+\end{align*}
+und 
+\begin{align*}
+  (x^{*})^{T}By^{*} = (B^{T}x^{*})^{T} y^{*} \geq w^{*}\cdot e^{T}y^{*} = w^{*}. 
+\end{align*}
+Zusammen mit \eqref{eq:equality} liefert das $v^{*} = (x^{*})^{T}Ay^{*}$ und $w^{*} = (x^{*})^{T}Ay^{*}$. Seien nun $x \in \hat X_{1}$ und $y \in \hat X_{2}$ beliebig gewählt. Dann folgt
+\begin{align*}
+  \hat f_{1} (x, y^{*}) = x^{T}Ay^{*} \geq v^{*} = (x^{*})^{T}Ay^{*} = \hat f_{1}(x^{*}, y^{*})
+\end{align*}
+und
+\begin{align*}
+  \hat f_{2} (x^{*}, y) = (x^{*})^{T}Ay \geq w^{*} = (x^{*})^{T}Ay^{*} = \hat f_{2}(x^{*}, y^{*}).
+\end{align*}
+Somit ist $(x^{*}, y^{*})$ NGG von $\hat \Gamma$. 
+\end{beweis}
+\begin{bemerkung*}
+  Zu beachten ist, dass nur eine globale Lösung von \eqref{} ein NGG von $\hat \Gamma$ liefert. Da die Zielfunktion von 2.8 nicht konvex ist, gibt es im Allgemeinen auch lokale Lösungen, deren Zielfunktionswert größer als Null ist. 
+\end{bemerkung*}
