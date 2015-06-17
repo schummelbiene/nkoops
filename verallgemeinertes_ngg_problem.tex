@@ -1,0 +1,185 @@
+
+\section{Verallgemeinerte NGG-Probleme}
+\label{part:verallg-ngg-probl}
+Anstelle von $X_{\nu}\subseteq \R^{n_{\nu}}$ betrachten wir $X_{\nu}(x^{-\nu}) \subseteq \R^{n_{\nu}}$ (Ressourcen, die sich alle Spieler teilen müssen).
+\subsection{Definition und Beispiele}
+\label{sec:defin-und-beisp}
+\begin{definition*}
+  Gegeben seien $N$ Spieler, Funktionen $f_{\nu}: \R^{n} \lto \R$ für $\nu = 1, \dots, N$ sowie mengenwertige Abbildungen
+  \begin{align*}
+    X_{\nu}(\cdot): \R^{n_{-\nu}} \rrto\R^{n_{\nu}}. 
+  \end{align*}
+Unter dem \markdef{verallgemeinerten NGG-Problem} (GNEP) versteht man die Aufgabe, ein $x^{*} = (x^{*, 1}, \dots, x^{*, N}) \in \R^{N}$ zu finden, sodass für alle $\nu = 1, \dots, n$ gilt:
+\begin{align}\label{eq:4-1}
+&  x^{*, \nu} \in X_{\nu}(x^{*, \nu}) \notag\\
+&  f_{\nu}(x^{*, \nu}, x^{*, -\nu}) \leq f_{\nu}(x^{\nu}, x^{*, -\nu}) \quad \forall x^{\nu} \in X_{\nu}(x^{*, -\nu}). 
+\end{align}
+Ein solcher Vektor $x^{*}$ heißt \markdef{(verallgemeintertes) NGG} oder \markdef{Lösung des GNEP}. Ein Vektor $x \in \R^{n}$ heißt \markdef{zulässig} für das GNEP, wenn $x^{\nu} \in X_{\nu}(x^{-\nu})$ für $\nu = 1, \dots, N$ gilt.  
+\end{definition*}
+\begin{bemerkung*}
+  \begin{enumerate}
+  \item Ein $x^{*}$ löst das GNEP genau dann, wenn für jedes $\nu= 1,\dots, N$ die Komponente $x^{*, \nu}$ die Optimierungsaufgabe
+    \begin{align*}
+      f_{\nu}(x^{\nu}, x^{*, -\nu}) \to \min_{x^{\nu}}, \quad x^{\nu} \in X_{\nu}(x^{*, \nu})
+    \end{align*}
+ist. 
+%\datum{15. Juni 2015}
+\item Die mengenwertige Abbildung $X(\cdot): R^{n}\rrto \R^{n}$ sei definiert durch
+  \begin{align*}
+    X(x) \coloneqq X_{1}(x^{-1}) \times X_{2}(x^{-2}) \times \dots \times X_{n}(x^{-n}). 
+  \end{align*}
+Dann ist $x \in \R^{n}$ genau dann zulässig für das GNEP, wenn $x \in X(x)$, wenn $x$ also ein Fixpunkt von $X(\cdot)$ ist. 
+\item Das NGG-Problem (NEP) kann als Spezialfall des GNEP angesehen werden ($X_\nu(x^{-\nu}) = X_{\nu}$, $X = X_{1} \times \dots \times X_{N}$). 
+\item Oft kann $X_{\nu}(x^{-\nu})$ beschrieben werden als
+  \begin{align*}
+    X_{\nu}(x^{-\nu}) = \set{x^{\nu} \in \R^{n_{\nu}}| g^{\nu}(x^{\nu}, x^{-\nu})\leq 0, \, h^{\nu}(x^{\nu}, x^{-\nu}) = 0}. 
+  \end{align*}
+  \end{enumerate}
+\end{bemerkung*}
+\begin{beispiel}\label{ex:4-1} %4.1 
+  $N = 2$:
+  \begin{align*}
+&    x = (x_{1}, x_{2})^{T}\\
+&f_{1}(x) = (x_{1} - 1)^{2} \to \min_{x_{1}}, \quad x_{1} + x_{2} \leq 1\\
+&f_{2}(x) = (x_{2} - \frac 12)^{2} \to \min_{x_{2}}, \quad x_{1} + x_{2} \leq 1\\
+&X_{1}(x_{2}) = \set{x_{1} \in \R| x_{1} \leq 1 - x_{2}} = (- \infty, 1 - x_{2}]\\
+&X_{1}(2) = (- \infty, -1]\\
+&X_{1}(1) = (- \infty, 0]\\
+&X_{1}(-2) = (- \infty, 3]\\
+&X_{2}(x_{1}) = \set{x_{2} \in \R| x_{2} \leq 1 - x_{1}} = (- \infty, 1 - x_{1}]\\
+&X_{2}(0) = (-\infty, 1]\\
+&X_{2}(-1) = (-\infty, 2]
+  \end{align*}
+  \begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+      \draw (-3,0) -- coordinate (x axis mid) (3,0);
+    	\draw (0,-3) -- coordinate (y axis mid) (0,3);
+    	%ticks
+    	\foreach \x in {-3,...,3}
+     		\draw (\x,1pt) -- (\x,-3pt)
+			node[anchor=north] {\x};
+    	\foreach \y in {-3,...,3}
+     		\draw (1pt,\y) -- (-3pt,\y) 
+     			node[anchor=east] {\y}; 
+          \draw[domain=-2:3, variable= \x] plot ({\x},{1 - \x});
+
+          \draw[dotted] (-1, -3) -- (-1, 2);
+          \draw[dotted] (-3, -2) -- (3, -2);
+    \end{tikzpicture}
+    \caption{Visualisierung}
+    \label{fig:ex_NEP}
+  \end{figure}
+Für ausgewählte $x$ soll $X(x)$ berechnet werden (um $x \in X(x)$ zu prüfen).
+\begin{align*}
+  X(0,1) = X_{1}(1) \times X_{2}(0) = (- \infty, 0] \times (- \infty, 1], 
+\end{align*}
+also ist $(0, 1) \in X(0, 1)$. 
+\begin{align*}
+    X(1,1) = X_{1}(1) \times X_{2}(1) = (- \infty, 0] \times (- \infty, 0], 
+\end{align*}
+also ist $(1, 1) \in X(1, 1)$, alsi ist $(1, 1)$ unzulässig. 
+\end{beispiel}
+\begin{beispiel} \label{ex:4-2} %4.2
+  $N = 2$
+  \begin{align*}
+    &x = (x_{1} x_{2})^{T}\\
+    &f_{1}(x) = (x_{2} + 2)x_{1} \to \min_{x_{1}}, \quad x_{1}^{2} + x_{2}^{2} \leq 1\\
+    &f_{2}(x) = (x_{2}^{2} + x_{1}x_{2}) \to \min_{x_{2}}, \quad x_{1} - x_{2}^{2} \leq 0
+  \end{align*}
+  \begin{align*}
+    X_{1}(x_{2}) &=    \begin{cases}
+      [- \sqrt{-1 - x_{2}^{2}}, \sqrt{1- x_{2}^{2}}] & \norm{x_{2}}\leq 1\\
+      \emptyset & \norm{x_{2}} > 1 \end{cases}\\
+    X_{2}(x_{1}) &= \set{x_{2} \in \R| \, x_{2} \geq x_{1}} = [x_{1}, \infty)
+  \end{align*}
+  \begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+      \draw (-2,0) -- coordinate (x axis mid) (2,0);
+    	\draw (0,-2) -- coordinate (y axis mid) (0,2);
+      \draw (0, 0) circle (1);
+    \end{tikzpicture}
+    \begin{tikzpicture}
+      \draw (-1,0) -- coordinate (x axis mid) (3,0);
+    	\draw (0,-1) -- coordinate (y axis mid) (0,3);
+      \draw [domain=-0.5:2.5, variable= \x] plot ({\x},{\x});
+      \draw[dotted] (2, 2) -- (2, 3);
+    \end{tikzpicture}
+    \caption{Beispiel}
+  \end{figure}
+  \begin{align*}
+    (0, 0.6) &\in X(0, 0.6) = X_{1}(0.6) \times X_{2}(0) = [-0.8, 0.8] \times [0, \infty)\\
+    (0.8, 0.6) &\notin X(0.8, 0.6) = X_{1}(0.6) \times X_{2}(0.8) = [-0.8, 0.8] \times [0.8, \infty)
+  \end{align*}
+\end{beispiel}
+\begin{beispiel}\label{ex:4-3} %4.3
+  Oligopolmodell nach Cournot
+
+  \begin{align*}
+    f_{\nu}(x_{1}, \dots, x_{N}) &= x_{\nu} \cdot p(x_{1}, \dots, x_{N}) - K_{\nu}(x_{\nu}) \to \max_{x_{\nu}}, \quad x_{\nu} \geq 0, x_{1} + \dots + x_{N} \leq C\\
+X_{\nu}(x_{-\nu}) &= \set{x_{\nu} \in \R| 0 \leq x_{\nu}\leq C - \sum_{\eta = 1, \nu \neq \eta}^{N}x_{\eta}}
+  \end{align*}
+\end{beispiel}
+\begin{definition*}
+  Für $\nu \in \set{1, \dots, N}$ und $x^{-\nu} \in \R^{-n_{\nu}}$ sei
+  \begin{align*}
+    S_{\nu}(x^{-\nu}) = \set{x^{\nu} \in X_{\nu}(x^{-\nu})| \, f_{\nu}(x^{\nu}, x^{-\nu}) \leq f_{\nu}(y, x^{-\nu}) \, \forall y^{\nu} \in X_{\nu}(x^{-\nu})}
+  \end{align*}
+die \markdef{Menge der besten Antworten} des Spielers $\nu$ auf die Strategiekombination $x^{-\nu}$ der Gegenspieler definiert. Die mengenwertige Abbildung $x^{-\nu} \mapsto S_{\nu}(x^{-\nu})$ heißt \markdef{Beste-Antwort-Funktion} des Spielers $\nu$ und die Abbildung $x \mapsto S(x)$ mit
+\begin{align*}
+  S(x)\coloneqq S_{1}(x^{-1}) \times \dots \times S_{N}(x^{-N})
+\end{align*}
+\markdef{Beste-Antwort-Funktion} des GNEPs.
+\end{definition*}
+
+\begin{satz}\label{thm:4-1} 
+ Ein $x^{*} \in \R^{n}$ ist genau dann Lösung des GNEPs, wenn $x^{*}$ Fixpunkt der Abbildung $x \mapsto S(x)$ ist, das heißt, wenn $x^{*} \in S(x^{*})$. 
+\end{satz}
+\begin{beweis}
+   $x^{*}$ ist Lösung des GNEPs $\Leftrightarrow$ $x^{*, \nu} \in X_{\nu}(x^{*, -\nu})$ und \eqref{eq:4-1} erfüllt ist für alle $\nu = 1, \dots, N$ $\Leftrightarrow$ $x^{*, \nu} \in S_{\nu} (x^{*, - \nu})$ für $\nu = 1, \dots, N$ $\Leftrightarrow$ $x^{*} \in S(x^{*})$. 
+\end{beweis}
+\begin{fortsetzung} Beispiel \ref{ex:4-1}
+  Ermittlung von $S_{1}(x_{2})$: Lösung von $(x_{1} - 1)^{2} \to \min_{x_{1}}$ bei $x_{1} \leq 1 - x_{2}$. Ist $x_{2} \leq 0$, dann ist $x_{1} = 1$ zulässig und eindeutige Lösung. Andernfalls ist $x_{1} =  1 - x_{2}$ die eindeutige Lösung.
+  \begin{align*}
+     S_{1}(x_{2})=
+     \begin{cases}
+       \set 1, & x_{2} \leq 0\\
+       \set{1 - x_{2}}, & x_{2} > 0, 
+     \end{cases}
+  \end{align*}
+Analog erhält man 
+  \begin{align*}
+     S_{2}(x_{1})=
+     \begin{cases}
+       \set {\frac 1 2}, & x_{1} \leq \frac 1 2\\
+       \set{1 - x_{2}}, & x_{1} > \frac 1 2. 
+     \end{cases}. 
+  \end{align*}
+Achtung, wenn $x_{1} \in S_{1}(x_{2})$ und $x_{2} \in S_{2}(x_{1})$. Lösungsmenge des GNEP ist
+\begin{align*}
+  \set{t, 1-t \left|\, \frac 1 2 \leq t \leq 1\right.}.
+\end{align*}
+\end{fortsetzung}
+\begin{definition*}
+  \begin{itemize}
+  \item Ein GNEP heißt \markdef{Spieler-konvex} (\markdef{player convex}), wenn für jeden Spieler $\nu \in \set{1, \dots, N}$ und für jeden Vektor $x^{-\nu} \in \R^{n_{-\nu}}$ die Menge $X_{\nu}(x^{-\nu})$ konvex ist und $f_{\nu}(\cdot, x^{-\nu})$ konvex ist. 
+\item Ein GNEP heißt \markdef{GNEP mit gemeinsamen Restriktionen} (\markdef{GNEP with shared/common constraints}), wenn eine nichtleere Menge $X \subseteq \R^{n}$ derart existiert, sodass
+  \begin{align*}
+    X_{\nu} (x^{-\nu}) = \set{x^{\nu} \in \R^{n}|\, (x^{\nu}, x^{-\nu}) \in X}
+  \end{align*}
+für alle $\nu = 1, \dots, N$ und alle $x^{-\nu} \in \R^{n_{-\nu}}$. Die Menge $X$ heißt dann \markdef{gemeinsame Strategiemenge}. 
+\item Ein GNEP mit gemeinsamen Restriktionen, bei dem $X$ nichtleer und konvex ist und bei dem die Funktionen $f_{\nu}(\cdot, x^{-\nu})$ konvex sind für alle $\nu = 1, \dots, N$ und alle $x^{-\nu} \in \R^{n_{-\nu}}$, heißt \markdef{jointly convex}. 
+\end{itemize}
+\end{definition*}
+\begin{bemerkung*}
+  \begin{enumerate}
+  \item Ein GNEP, das jointly convex ist, ist auch Spieler-konvex. Die Umkehrung gilt im Allgemeinen nicht. 
+  \end{enumerate}
+\end{bemerkung*}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "vorlesung"
+%%% End: 

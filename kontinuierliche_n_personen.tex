@@ -1,0 +1,485 @@
+\section{Kontinuierliche N-Personen-Spiele}
+
+Mit $\Gamma = \set{f_{\nu}, X_{\nu}}_{\nu = 1}^{N}$ sei stets ein $N$-Personen-Spiel gegeben. Die Strategiemengen $X_{\nu}$ seien stets nichtleere Teilmengen des $\R^{n_{\nu}}$. $n \coloneqq \sum_{\nu = 1}^{N} n_{\nu}$ bezeichne die Anzahl aller Variablen.
+\subsection{Existenzaussagen für Nash-Gleichgewichtsprobleme}
+\label{sec:exist-fur-nash}
+
+\begin{definition*}
+  Es seien $X \subseteq \R^{n}$ und $Y\subseteq \R^{m}$. Eine Abbildung $f: X \to 2^{Y}$ wird \markdef{mengenwertige Abbildung} genannt. Dabei bezeichnet $2^{Y}$ die Potenzmenge von $Y$. Man schreibt anstelle von $f: X \to 2^{Y}$ auch $f: X \rrto Y$. 
+\end{definition*}
+\begin{beispiel*}
+  Die Beste-Antwort-Funktion
+$S: x \mapsto S(x)$ eines Spiels ist eine mengenwertige Abbildung. Zur Erinnerung: $S(x) = S_{1}(x^{-1}) \times \dots \times S_{N}(x^{-N})$, wobei
+\begin{align*}
+  S_{\nu}(X^{-\nu}) \coloneqq \set{x^{\nu} \in X_{\nu}| \, f_{\nu} (x^{\nu}, x^{-\nu}) \leq f_{\nu}(y^{\nu}, x^{-\nu}) \forall y^{\nu}\in X_{\nu}}. 
+\end{align*}
+\end{beispiel*}
+\begin{definition*}
+  Es seien $X\subseteq \R^{n}$ und $Y\subseteq \R^{m}$ abgeschlossene Mengen. Eine mengenwertige Abbildung $f: X \rrto Y$ heißt \markdef{abgeschlossen} in einem Punkt $x \in X$, wenn für je zwei konvergente Folgen $\set{x^{k}} \subset X$ und $\set{y^{k}} \subset Y$ mit $\lim_{k \to \infty} x^{k} = x$ und $y^{k} \in f(x^{k})$ für alle $k \in \N$ gilt:
+  \begin{align*}
+    y \coloneqq \lim_{k \to \infty} y^{k} \in f(x). 
+  \end{align*}
+$f$ heißt \markdef{abgeschlossen auf $X$}, wenn $f$ abgeschlossen in allen Punkten $x \in X$ ist. 
+\end{definition*}
+\begin{satz}Fixpunktsatz von Kakutani
+  
+Seien $X \subseteq \R^{n}$ nichtleer, konvex und kompakt, sowie $f: X\rrto X$ eine abgeschlossene mengenwertige Abbildung mit der Eigenschaft, dass die Bilder $f(x)\subseteq X$ für alle $x \in X$ nichtleer und konvex sind. Dann besitzt $f$ einen Fixpunkt, das heißt, es existiert $x^{*} \in X$ mit $x^{*} = f(x^{*})$.
+\end{satz}
+\begin{satz}
+  Die Strategiemengen $X_{\nu} \subseteq \R^{n_{\nu}}$ seien nichtleer, konvex und kompakt und die Funktionen $f_{\nu}: X = X_{1} \times \dots \times X_{N} \to \R$ seien stetig. Ferner seien die Mengen der besten Antworten $S_{\nu}(x^{-\nu})$ konvex für alle $\nu = 1, \dots, N$ und alle $x^{-\nu}\in X_{- \nu}$. Dann besitzt das Spiel mindestens ein NGG. 
+\end{satz}
+\begin{beweis}
+  Wir wollen den Fixpunktsatz von Kakutani auf die Abbildung $S$ anwenden. Da die $X_{\nu}$ nichtleer, konvex und kompakt sind, besitzt auch $X = X_{1}\times \dots \times X_{N}$ diese Eigenschaften. Desweiteren gilt $S_\nu(x^{-\nu}) \subseteq X_{\nu}$ für alle $\nu = 1, \dots, N$ und alle $x^{-\nu} \in X_{-\nu}$ und somit
+  \begin{align*}
+    S(x)=S_{1}(x^{-1})\times \dots \times S_{N}(x^{-N})\subseteq X
+  \end{align*}
+für alle $x \in X$. Daher gilt $S: X \rrto X$. 
+
+Für jedes $\nu = 1, \dots, N$ und jedes $x^{-\nu} \in X_{-\nu}$ ist die Menge $S_{\nu}(x^{-\nu})$ nichtleer, denn wegen der Stetigkeit von $f_{\nu}$ und der Kompaktheit von $X_{\nu}$ nimmt die Funktion $f_{\nu}(\cdot, x^{-\nu})$ ihr Minimum auf $X_{\nu}$ auf $X_{\nu}$ nach dem Satz von Weierstraß an. Damit ist auch $S(x) = S_{1}(x^{-1}) \times \dots \times S_{N}^{x^{-N}}$ nichtleer für jedes $x \in X$. Außerdem ist $S(x)$ konvex, denn nach Voraussetzung sind alle $S_{\nu}(x^{-\nu})$ konvex. 
+
+Es muss noch die Abgeschlossenheit von $S$ gezeigt werden. Sei dazu $x \in X$ beliebig und seien $\set{x_{k}}$ und $\set{y_{k}}$ konvergente Folgen in $X$ mit $\lim_{k \to \infty} x_{k} = x$ und $y_{k} \in S(x_{k})$ für alle $k \in \N$. Wir setzen $y \coloneqq \lim_{k \to \infty} y_{k}$. Aufgrund der Abgeschlossenheit von $X$ liegt $y$ in $X$. Wegen $y_{k} \in S(x_{k})$ gilt ferner
+\begin{align*}
+  f_{\nu}(y_{k}^{\nu}, x_{k}^{-\nu})\leq f_{\nu}(z^{\nu}m x_{k}^{- \nu})
+\end{align*}
+für alle $k \in \N$, alle $\nu = 1, \dots, N$ und alle $z^{\nu} \in X_{\nu}$. Aus der Stetigkeit von $f_{\nu}$ folgt daraus für $k \to \infty$: 
+\begin{align*}
+  f_{\nu}(y^{\nu}, x^{-\nu})\leq f_{\nu}(z^{\nu}, x^{-\nu})
+\end{align*}
+für alle $\nu = 1, \dots, N$ und alle $z^{\nu} \in X_{\nu}$. Somit gilt $y \in S(x)$. Damit ist die Abgeschlossenheit von $S$ nachgewiesen. Die mengenwertige Abbildung $S$ besitzt nach dem Fixpunktsatz von Kakutani einen Fixpunkt $x^{*}$. Nach Satz 1.1 ist $x^{*}$ NGG.  
+\end{beweis}
+\begin{definition}
+  Sei $X \subseteq \R^{n}$ eine konvexe Menge. Eine Funktion $f:X \to \R$ heißt \markdef{quasikonvex} auf $X$, wenn für alle $x, y \in X$ und alle $\lambda \in (0, 1)$ gilt:
+  \begin{align*}
+    f(\lambda x + (1- \lambda)y) \leq \max \set{f(x), f(y)}. 
+  \end{align*}
+\end{definition}
+\begin{bemerkung*}
+  \begin{enumerate}
+  \item Jede auf $X$ konvexe Funktion ist auch quasikonvex auf $X$. 
+  \item Ist $X \subseteq \R$ und $f: X \to \R$ monoton wachsend oder monoton fallend, dann ist $f$ quasikonvex auf $X$. 
+  \end{enumerate}
+\end{bemerkung*}
+\begin{korollar}
+  Die Strategiemengen $X_{\nu} \subseteq \R^{n_{\nu}}$ seien nichtleer, konvex und kompakt und die Funktionen $f_{\nu}: X \to \R$ seien stetig. Desweiteren seien die Funktionen $f_{\nu}(\cdot, x^{-\nu})$  quasikonvex für alle $\nu = 1, \dots, N$ und alle $x^{-\nu} \in X_{-\nu}$. Dann besitzt das Spiel mindestens ein NGG. 
+\end{korollar}
+\begin{beweis}
+  Für jedes $\nu \in \set{1,\dots, N}$ und jedes $x^{-\nu} \in X_{-\nu}$ ist die Menge aller Lösungen der Optimierungsaufgabe
+  \begin{align}\label{eq:set_solutions}
+    f_{\nu}(x^{\nu}, x^{-\nu}) \to \min_{X^{\nu}}
+  \end{align}
+bei $x^{\nu} \in X_{\nu}$ konvex (aufgrund der Konvexität von $X_{\nu}$ und der Quasikonvexität von $f_{\nu}(\cdot, x^{-\nu})$, vergleiche ÜA). Diese Lösungsmenge ist aber gerade die Menge $S_{\nu}(x^{-\nu})$. Anwendung von Satz 3.2 liefert das Gewünschte. 
+\end{beweis}
+\begin{beispiel}
+  Oligopol-Modell mit $N$ Unternehmen (nach Cournot).
+  \begin{itemize}
+  \item $x_{\nu}$ ist die hergestellte Menge des Produkts vom Unternehmen $\nu$;
+  \item $p(x_{1}, \dots, x_{N}) = b - \sum_{\nu = 1}^{N} x_{\nu}$ gibt den Preis für eine Einheit des Produktes an, $b> 0$;
+  \item $K_{\nu}(x^{\nu})$ sind die Kosten zu Herstellung einer Einheit des Produktes beim Unternehmen $\nu$, $K_{\nu}: [0, \infty) \to [0, \infty)$ konvex, stetig;
+  \item $X_{\nu} = [0, c_{\nu}]$, $c_\nu> 0$ fest
+  \end{itemize}
+$X_{\nu}$ sei nichtleer, kompakt, konvex. Auszahlung des $\nu$-ten Spielers:
+\begin{align*}
+  - f_{\nu}(x) &= - \(x_{\nu}\cdot p(x_{1}, \dots, x_{N}) - K_{\nu}(x^{\nu})\) \\
+  &= - \(x_{\nu}\(b- \sum_{\eta = 1}^{N}x_{\eta}\) - K_{\nu}(x_{\nu})\)\\
+  &= - \(x_{\nu}b- x_{\nu}^{2} - x_{\nu}\sum_{\eta = 1, \eta \neq \nu}^{N}x_{\eta} - K_{\nu}(x_{\nu})\)
+\end{align*}
+Offenbar ist $f_{\nu}$ stetig und $f_{\nu}(\cdot, x^{-\nu})$ eine konvexe Funktion auf $X_{\nu}$. Mit Korollar 3.4 folgt die Existenz eines NGG.  
+\end{beispiel}
+
+\subsection{Umformulierung des Nash-Gleichgewicht-Problems}
+\label{sec:umform-des-ngg}
+
+\subsubsection{Variationsungleichungen und NGG}
+\label{sec:vari-und-ngg}
+
+\begin{definition}
+  Es seien $X\subseteq \R^{n}$ nichtleer und $F: X \to \R^{n}$. Unter einer \markdef{Variationsungleichung} versteht man das Problem, ein $x^{*} \in X$ zu finden, sodass
+  \begin{align*}
+    F(x^{*})^{T}(x - x^{*}) \geq 0 \quad \forall x \in X. 
+  \end{align*}
+Für die Variationsungleichung schreiben wir kurz $VI(X, F)$. 
+\end{definition}
+\begin{proposition}
+  Gegeben sei $VI(\R^{n}, F)$. Ein Vektor $x^{*}$ ist genau dann Lösung von $VI(\R^{n}, F)$, wenn $F(x^{*}) = 0$.  (Beweis: Übung)
+\end{proposition}
+\begin{definition}
+  Sei $F: \R^{n}_{+} \to \R^{n}$. Das zugehörige \markdef{Komplementaritätsproblem} besteht darin, ein $x^{*} \in \R^{n}$ zu finden, sodass $x^{*}$ Lösung des folgenden Systems ist:
+  \begin{align}\label{eq:komp}
+    x \geq 0,\quad F(x)\geq 0,\quad x^{T}F(x) = 0
+  \end{align}
+\end{definition}
+\begin{proposition}
+  Ein Vektor $x^{*}$ ist genau dann Lösung von $VI(\R^{n}_{+}, F)$, wenn er dem System \eqref{eq:komp} genügt. (Beweis: Übung)
+\end{proposition}
+\begin{lemma}
+  Es sei $f:\R^{n} \to \R$ stetig differentierbar und $X\subseteq \R^{n}$ nichtleer und konvex. Dann gilt: 
+  \begin{enumerate}
+  \item Ist $x^{*}$ eine lokale Lösung der OA
+    \begin{align}\label{eq:oa}
+      f(x) \to \min, \quad x \in X
+    \end{align}
+dann gilt $\nabla f(x^{*})^{T}(x - x^{*})\geq 0$ für alle $x \in X$, d.h., $x^{*}$ löst $VI(X, \nabla f)$. 
+\item Ist $f$ zusätzlich konvex, so ist jede Lösung von $VI(X, \nabla f)$ eine Lösung von \eqref{eq:oa}.
+  \end{enumerate}
+\end{lemma}
+  \begin{satz}
+    Seien $X \subseteq \R^{n}$ nichtleer, konvex und kompakt, sowie $F: X \to \R^{n}$ stetig. Dann besitzt $VI(X, F)$ mindestens eine Lösung. 
+  \end{satz}
+  \begin{satz}
+    Es sei $\Gamma = \set{f_{\nu}, X_{\nu}}_{\nu = 1}^{N}$ ein Spiel mit nichtleeren und konvexen Strategiemengen $X_{\nu} \subseteq \R^{n_{\nu}}$, sowie stetig differenzierbare Auszahlungsfunktionen $f_{\nu}: U \supseteq X \to \R$, wobei $U \subseteq \R^{n}$ eine offene Obermenge von $X\coloneqq X_{1}\times \dots \times X_{N}$ ist. Dann gilt:
+    \begin{enumerate}
+    \item Ist $x^{*} \in X$ ein NGG von $\Gamma$, dann löst $x^{*}$ die Variationsungleichung $VI(X, F)$ mit
+      \begin{align}\label{eq:f}
+        F(x) \coloneqq
+        \begin{pmatrix}
+          \nabla_{x^{1}} f_{1}(x)\\
+          \vdots\\
+          \nabla_{x^{N}} f_{N}(x)
+        \end{pmatrix}
+      \end{align}
+      \item Sind zusätzlich die Funktionen $f_{\nu}(\cdot, x^{-\nu})$ konvex für alle $\nu = 1, \dots, N$ und alle $x^{-\nu} \in X_{-\nu}$, dann ist jede Lösung von $VI(X, F)$ mit $F$ aus \eqref{eq:f} ein NGG von $\Gamma$. 
+    \end{enumerate}
+  \end{satz}
+  \begin{beweis}
+    \begin{enumerate}
+    \item Sei $x^{*}$ ein NGG. Dann ist $x^{*, \nu}$ für $\nu = 1, \dots, N$ eine Lösung der Optimierungsaufgabe
+      \begin{align*}
+        f_{\nu}(x^{\nu}, x^{*, \nu}) \to \min_{x^{\nu}}
+      \end{align*}
+bei $x^{\nu} \in X_{\nu}$. Nach Lemma 3-12.1 gilt dann $\nabla_{x^{\nu}}f_{\nu}(x^{*, \nu}, x^{*, -\nu}) (x^{\nu} - x^{*, \nu}) \geq 0$
+für alle $x^{\nu} \in X_{\nu}$. Daraus folgt
+\begin{align*}
+  F(x^{*})^{T} (x - x^{*}) = \sum_{\nu = 1}^{N} \nabla_{x^{\nu}}f_{\nu}(x^{*, \nu}, x^{*, -\nu})^{T}(x^{\nu} - x^{*, \nu}) \geq 0. 
+\end{align*}
+für alle $x \in X$. Also ist $x^{*}$ eine Lösung von $VI(X, F)$. 
+\item Sei $x^{*}$ Lösung von $VI(X, F)$, das heißt, es gilt $F(x^{*})^{T} (x - x^{*}) \geq 0$ für alle $x \in X$. Für $x = (x^{\nu}, x^{*, -\nu})$ folgt ($\nu =1, \dots, N$)
+  \begin{align*}
+    F(x^{*})^{T}(x - x^{*}) = \nabla_{x^{\nu}}f_{\nu}(x^{*})^{T}(x^{\nu} - x^{*, \nu}) \geq 0
+  \end{align*}
+  für alle $x^{\nu} \in X_{\nu}$. Da $f_{\nu}(\cdot, x^{*, -\nu})$ nach Voraussetzung konvex ist, folgt daraus mit Lemma 3-12, dass $x^{*, \nu}$ die Optimierungsaufgabe $f_{\nu} (x^{\nu}, x^{*, - \nu}) \to \min_{x^{\nu}}$ bei $x^{\nu} \in X_{\nu}$ löst. Da dies für $\nu = 1, \dots, N$ gilt, ist $x^{*}$ ein NGG. 
+\end{enumerate}    
+\end{beweis}
+
+\subsubsection{Umformulierung mittels Nikaida-Isoda-Funktionen}
+\label{sec:umform-mit-nika}
+
+\begin{definition}
+  Die Funktion $\Psi: X \times X \to \R$ mit $X = X_{1} \times X_{N}$, definiert durch
+  \begin{align*}
+    \Psi(x, y) \coloneqq\sum_{\nu = 1}^{N} \(f_{\nu}(x^{\nu}, x^{-\nu}) - f_{\nu}(y^{\nu}, x^{-\nu})\)
+  \end{align*}
+(Vergleich von Strategien) heißt \markdef{Nikaida-Isoda-Funktion} oder \markdef{Ky-Fan-Funktion} des Spiels $\Gamma = \set{f_{\nu}, X_{\nu}}_{\nu = 1}^{N}$.
+\end{definition}
+\begin{satz}\label{thm:psi_ngg}
+  Es gilt:
+\enu{\alph}
+  \begin{enumerate}
+  \item $\sup_{y \in X} \Psi(x, y) \geq 0$ für alle $x \in X$.
+  \item $x^{*} \in X$ ist genau dann NGG, wenn $\sup_{y \in X} \Psi(x^{*}, y) = 0$. 
+  \end{enumerate}
+\end{satz}
+\begin{beweis}
+  \begin{enumerate}
+  \item Sei $x \in X$ fest gewählt. Dann folgt $\sup_{y \in X} \Psi(x, y)\geq \Psi(x, x)= 0$.
+  \item Sei $x^{*}$ ein NGG. Dann gilt für alle $\nu = 1, \dots, N$ und alle $y^{-\nu} \in X_{\nu}$:
+    \begin{align*}
+      f_{\nu} (x^{*, \nu}, x^{*, -\nu}) \leq       f_{\nu} (y^{\nu}, x^{*, -\nu}). 
+    \end{align*}
+Es folgt für alle $y = (y^{1}, \dots, y^{N}) \in X$:
+\begin{align*}
+  \Psi(x^{*}, y) = \sum_{\nu = 1}^{N}(f_{\nu}(x^{*, \nu}, x^{*, -\nu})- f_{\nu}(y^{\nu}, x^{*, -\nu}))\leq 0. 
+\end{align*}
+Das impliziert $sup_{y \in X} \Psi(x^{*}, y) \leq 0$. Zusammen mit Teil (a) folgt $\sup_{y \in X}\Psi(x^{*}, y) = 0$. 
+
+Es gelte nun umgekehrt $\sup_{y \in X} \Psi(x^{*}, y) = 0$. Dann folgt $\Psi(x^{*}, y) \leq 0$ für alle $y \in X$. Seien $\nu \in \set{1, \dots, N}$ und $x^{\nu} \in X_{\nu}$ beliebig gewählt. Dann liegt $y \coloneqq (x^{\nu}, x^{*, -\nu} \in X$, sodass gilt:
+\begin{align*}
+  0 \geq \Psi(x^{*}, y) &= \sum_{\eta = 1}^{N}(f_{\eta}(x^{*, \eta}, x^{*, -\eta} - f_{\eta}(\underbrace{y^{\eta}}_{x^{*, \eta} \text{ wenn } \eta \neq \nu}, x^{*, -\eta}))\\
+&=f_{\nu}(x^{*, \nu}, x^{*, -\nu} - f_{\nu}(x^{\nu}, x^{*, -\nu})
+\end{align*}
+Daraus folgt $f_{\nu}(x^{*}) \leq (x^{\nu}, x^{*, -\nu})$ für alle $ \nu = 1, \dots, N$ und alle $x^{\nu} \in X_{\nu}$. Also ist $x^{*}$ ein NGG. 
+  \end{enumerate}
+\end{beweis}
+Für den Rest von 3.2.2 wird vorausgesetzt, dass $ f_{\nu}: X \to \R$ stetig ist für $ \nu = 1, \dots, N$. Weiter sei $X$ 'für den Moment' kompakt. 
+\begin{definition*}
+  Die Funktion $V: X \to \R$ sei definiert durch
+  \begin{align*}
+    V(x) \coloneqq \max_{y \in X} \Psi(x, y). 
+  \end{align*}
+\end{definition*}
+\begin{satz}\label{thm:v}
+  Die Strategiemengen $X_{\nu} \subset \R^{n_{0}}$ seien nichtleer und kompakt und die Funktionen $f_{\nu}: X \to \R$ ($\nu = 1, \dots, N$) seien stetig auf $X$. Dann gilt:
+  \begin{enumerate}
+  \item $V(x) \geq 0$ für alle $x \in X$. 
+  \item $x^{*} \in X$ ist genau dann ein NGG, wenn $V(x^{*})= 0$. 
+  \end{enumerate}
+\end{satz}
+\begin{beweis}
+  Analog zum letzten Satz. 
+\end{beweis}
+\begin{korollar}
+Unter den Voraussetzungen von Satz \ref{thm:v} ist $x^{*} \in X$ genau denn ein NGG, wenn es die Optimierungsaufgabe
+\begin{align*}
+  V(x) \lto \min, \quad x \in X
+\end{align*}
+löst und der optimale Zielfunktionswert $V(x^{*})= 0$ ist. 
+\end{korollar}
+\begin{definition*}
+  Für einen Parameter $\alpha > 0$ definieren wir die \markdef{regularisierte Nikaida-Isoda-Funktion} $\Psi_{\alpha}: X \times X \to \R$ durch
+  \begin{align*}
+    \Psi_{\alpha}(x, y) \coloneqq \Psi(x, y) - \frac \alpha 2 \nnorm{x - y}_{2}^{2}. 
+  \end{align*}
+\end{definition*}
+Wir setzen voraus, dass $X_{\nu}$ nichtleer, konvex und abgeschlossen für $\nu = 1, \dots, N$ ist. Außerdem werde vorausgesetzt, dass $f_{\nu}(\cdot, x^{- \nu})$ konvex ist für alle $ \nu = 1, \dots, N$ und für alle $x^{-\nu} \in X_{-\nu}$. 
+Deshalb ist die Abbildung $y \mapsto f_{\nu}(y, x^{-\nu})$ und $y \mapsto \Psi(x, y)$ konkav und stetig für jedes $ x\in X$. Damit ist $y \mapsto \Psi_{\alpha}(x, y)$ gleichmäßig konkav. Dabei besitzt die Maximierungsaufgabe
+\begin{align*}
+  \Psi_{\alpha}(x, y) \lto \max_{y}, \quad y \in X
+\end{align*}
+für jedes $x \in X$ eine eindeutige Lösung $y_{\alpha}(x)$. Analog zu $V$ definieren wir $V_{\alpha}: X \to \R$ durch
+\begin{align*}
+  V_{\alpha}(x)\coloneqq \max_{y \in X} \Psi_{\alpha}(x, y) = \Psi_{\alpha}(x, y_{\alpha}(x)). 
+\end{align*}
+\begin{satz}\label{thm:konv}
+  Sei $\alpha > 0$. Die Mengen $X_{\nu}\subseteq \R^{n_{\nu}}$ seien nichtleer, konvex und abgeschlossen und die Funktionen $f_{\nu}: X \to \R$ seien stetig. Außerdem seien die Funktionen $f_{\nu}(\cdot, x^{-\nu})$ konvex für $\nu = 1, \dots, N$ und alle $x^{-\nu} \in X_{-\nu}$. Dann gilt:
+  \begin{enumerate}
+  \item $V_{\alpha}(x) \geq 0$ für alle $x \in X$. 
+  \item $x^{*} \in X$ ist genau dann NGG, wenn $V_{\alpha}(x^{*}) = 0$. 
+  \end{enumerate}
+\end{satz}
+  \begin{beweis}
+    \begin{enumerate}
+    \item Für $x \in X$ gilt $V_{\alpha}(x) = \max_{y \in X} \Psi_{\alpha}(x, y) \geq \Psi_{\alpha}(x, x) = 0$. 
+    \item Sei $x^{*} \in X$ ein NGG. Nach Satz \ref{thm:psi_ngg} gilt dann $\sup_{y \in X}\Psi(x^{*}, y) = 0$. Also gilt $\Psi(x^{*}, y) \leq 0$ fpr alle $y \in X$ und somit
+      \begin{align*}
+        \Psi_{\alpha}(x^{*}, y) = \Psi(x^{*}, y) - \frac \alpha 2 \nnorm{x^{*} - y}_{2}^{2} 
+      \end{align*}
+für alle $y \in X$. Daraus folgt 
+\begin{align*}
+    V_{\alpha}(x^{*})= \max_{y \in X} \Psi_{\alpha}(x^{*}, y) = \Psi_{\alpha}(x^{*}, y_{\alpha}(x^{*})) \leq 0.
+\end{align*}
+Zusammen mit (a) folgt $V_{\alpha}(x^{*}) = 0$. 
+\vspace{5mm}
+
+Sei nun $V_{\alpha}(x^{*}) = 0$. Dann gilt
+\begin{align}\label{eq:psi_neg}
+  \Psi_{\alpha}(x^{*}, y) \leq 0, \quad \forall y \in X. 
+\end{align}
+Angenommen, $x^{*}$ ist kein NGG. Mit Satz \ref{thm:psi_ngg} hat man, dass $y \in X$ existiert mit $\Psi( x^{*}, y) > 0$. Wegen der Konvexität von $X$ ist $z(\lambda) \coloneqq \lambda x^{*} + (1 - \lambda)y \in X$ für alle $\lambda \in [0, 1]$. Aus \eqref{eq:psi_neg} folgt daher
+\begin{align*}
+  \Psi_{\alpha}(x^{*}, z(\lambda))\leq 0. 
+\end{align*}
+Andererseits gilt aufgrund der Konkavität von $\Psi(x^{*}, \cdot)$: 
+\begin{align*}
+  \Psi(x^{*}, z(\lambda))\geq \lambda\underbrace{ \Psi(x^{*}, x^{*})}_{ = 0} + (1 - \lambda)\Psi(x^{*}, y) = (1 - \lambda) \Psi( x^{*}, y), \quad \forall \lambda \in (0, 1). 
+\end{align*}
+Dies impliziert
+\begin{align*}
+  \Psi_{\alpha}(x^{*}, z(\lambda)) &= \Psi(x^{*}, z(\lambda)) - \frac \alpha 2 \nnorm{x^{*} - z(\lambda)}_{2}^{2} \\
+& \geq ( 1 - \lambda)\Psi(x^{*}, y) -  \frac \alpha 2 \nnorm{(1 - \lambda)x^{*} - (1 - \lambda)y}_{2}^{2}\\
+&= (1 - \lambda) \Psi(x^{*}, y) - \frac \alpha 2 (1 - \lambda)^{2} \nnorm{x^{*} - y}_{2}^{2} \\
+&= (1 - \lambda) \(\Psi(x^{*}, y) - \frac \alpha 2 (1 - \lambda) \nnorm{x^{*} - y}_{2}^{2}\)\\
+& > 0
+\end{align*}
+für alle $ \lambda > 0$, die hinreichend nahe an $1$ sind. Das ist ein Widerspruch zu $\Psi_{\alpha}(x^{*}, y) \leq 0$ für alle $y \in X$. Also ist $x^{*}$ ein NGG.
+\end{enumerate}
+\end{beweis}
+\begin{korollar}
+   Unter den Voraussetzungen von Satz \ref{thm:konv} ist $x^{*} \in X$ genau dann ein NGG, wenn $x^{*}$ die Optimierungsaufgabe
+   \begin{align}\label{eq:min_v}
+     V_{\alpha}(x) \lto \min, \quad x \in X
+   \end{align}
+löst und der optimale Zielfunktionswert $V_{\alpha}(x^{*}) = 0$ ist. 
+\end{korollar}
+%\datum{04. Juni 2015}
+Falls $f_{\nu}$ für $\nu = 1, \dots, N$ stetig differenzierbar ist, so ist auch $V_{\alpha}$ stetig differenzierbar.
+\begin{satz}\label{thm:danskin} Danskin
+  
+  Seien $X \subseteq \R^{n}$ nichtleer, konvex und abgeschlossen. $U$ sei eine offene Obermenge von $X$, $f: U \times U \lto \R$ stetig differenzierbar und $f(x, \cdot)$ gleichmäßig konkav für jedes $x \in U$. Dann existiert zu jedem $x \in U$ ein eindeutig bestimmtes Element $\tau(x) \in X$ mit $f(x, \tau(x)) = \max_{y \in X} f(x, y)$. 
+
+Ist die hierdurch definierte Abbildung $x \mapsto \tau(x)$ stetig, so ist die durch
+\begin{align*}
+  \sigma(x) \coloneqq \max_{y \in X} f(x, y) = f(x, \tau(x))
+\end{align*}
+definierte Abbildung $\sigma: U \lto \R$ stetig differenzierbar und es gilt $\nabla \sigma (x) =\left. \nabla_{x}f(x, y)\right|_{y = \tau(x)}$. 
+\end{satz}
+\begin{satz}
+Sei $\alpha > 0$. Die Strategiemengen $X_{\nu} \subseteq \R^{n_{\nu}}$ seien nichtleer, konvex und abgeschlossen und $f_{\nu}: U \lto \R$ sei stetig differenzierbar für $\nu = 1, \dots, N$, wobei $U = U_{1} \times \dots \times U_{N} \supset X_{1} \times \dots \times X_{N} = X$. Weiterhin seien die Funktionen $f_{\nu}(\cdot, x^{-\nu})$ konvex für $\nu = 1, \dots, N$ und alle $x^{-\nu} \in U_{-\nu}$. Dann ist $V_{\alpha}$ stetig differenzierbar mit
+\begin{align*}
+  \nabla V_{\alpha}(x) = \left.\nabla_{x} \Psi_{\alpha} (x, y)\right|_{y = y_{\alpha}(x)}.
+\end{align*}
+\end{satz}
+\begin{beweis}
+  Die Aussage folgt aus Satz \ref{thm:danskin} mit $f\coloneqq \Psi_{\alpha}$, $\sigma \coloneqq V_{\alpha}$ und $\tau \coloneqq y_{\alpha}$. Die Stetigkeit der Abbildung $x \mapsto y_{\alpha}(x)$ folgt aus Resultaten über mengenwertige Abbildungen. 
+\end{beweis}
+Seien $\beta > \alpha > 0$ sowie $V_{\alpha, \beta}: \R^{n} \lto \R$ mit
+\begin{align*}
+  V_{\alpha, \beta}(x) \coloneqq V_{\alpha}(x) - V_{\beta}(x). 
+\end{align*}
+\begin{lemma}\label{lem:Valphabeta} %3.16
+  Die Strategiemengen $X_{\nu} \subseteq \R^{n_{\nu}}$ seien nichtleer, konvex und abgeschlossen, $f_{\nu}: \R^{n} \lto \R$ sei stetig für $\nu = 1, \dots, N$. Weiterhin seien die Funktionen $f_{\nu}(\cdot, x^{-\nu})$ konvex für alle $\nu = 1, \dots, N$ und alle $x^{-\nu} \in \R^{n_{-\nu}}$. Dann gilt für alle $ x\in \R^{n}$
+  \begin{align*}
+    V_{\alpha, \beta} \geq \frac {\beta - \alpha}{ 2} \nnorm{x - y_{\beta}(x)}_{2}^{2}. 
+  \end{align*}
+\end{lemma}
+\begin{beweis}
+  Für alle $ x \in \R^{n}$ gilt $V_{\alpha}(x) = \max_{y \in X}\Psi_{\alpha}(x, y) \geq \Psi_{\alpha} (x, y_{\beta}(x))$. Daraus folgt
+  \begin{align*}
+    V_{\alpha, \beta}(x) &= V_{\alpha}(x) - V_{\beta}(x)\\
+& \geq \Psi_{\alpha}(x, y_{\beta}(x)) - \Psi_{\beta}(x, y_{\beta}(x)) \\
+&= \Psi(x, y_{\beta}(x) - \frac \alpha 2 \nnorm{x - y_{\beta}(x)}_{2}^{2} - \left(\Psi(x, y_{\beta}(x) - \frac \beta2 \nnorm{x - y_{\beta}(x)}_{2}^{2}\right)\\
+&= \frac{\beta - \alpha} 2 \nnorm {x - y_{\beta}(x)}_{2}^{2}. 
+  \end{align*}
+\end{beweis}
+\begin{satz}%3.17
+  Unter den Voraussetzungen von Lemma \ref{lem:Valphabeta} gilt:
+  \begin{enumerate}
+  \item $V_{\alpha, \beta}(x) \geq 0$ für alle $x \in \R^{n}$
+  \item $x^{*} \in \R^{n}$ ist genau dann ein NGG, wenn $V_{\alpha, \beta}(x^{*}) = 0$. 
+  \end{enumerate}
+\end{satz}
+\begin{beweis}
+  \begin{enumerate}
+  \item Klar wegen Lemma \ref{lem:Valphabeta}. 
+  \item Sei $x^{*}$ ein NGG. Nach Satz \ref{thm:konv} gilt dann $V_{\alpha}(x^{*}) = V_{\beta}(x^{*}) = 0$ und folglich gilt $V_{\alpha, \beta}(x^{*}) = 0$.
+
+    Sei nun umgekehrt $V_{\alpha, \beta}(x^{*}) = 0$. Mit Lemma \ref{lem:Valphabeta} folgt $x^{*} = y_{\beta}(x^{*})$. Daraus folgt per Definition von $\Psi_{\beta}$, dass $x^{*} \in X$ und 
+    \begin{align*}
+      V_{\beta}(x^{*})  = \Psi_{\beta}(x^{*}, y_{\beta}(x^{*})) = \Psi_{\beta}(x^{*}, x^{*}) = 0. 
+    \end{align*}
+Nach Satz \ref{thm:konv} ist somit $x^{*}$ ein NGG. 
+  \end{enumerate}
+\end{beweis}
+\begin{korollar} %3.18
+  Unter den Voraussetzungen von \ref{lem:Valphabeta} ist $x^{*} \in \R^{n}$ genau dann ein NGG, wenn $x^{*}$ die unrestringierte Optimierungsaufgabe
+  \begin{align}\label{eq:opt_vab}
+    V_{\alpha, \beta}(x) \lto \min
+  \end{align}
+löst und der optimale Zielfunktionswert $V_{\alpha, \beta}(x^{*}) = 0$ ist. 
+\end{korollar}
+
+\subsubsection{KKT-Bedingungen eines Spiels}
+\label{sec:kkt-beding-eines}
+\begin{align}\label{eq:X_nu_kkt}
+  X_{\nu} \coloneqq \set{x^{\nu}\in \R^{n_{\nu}}| \, g^{\nu}(x^{\nu}) \leq 0, h^{\nu} (x^{\nu}) = 0}
+\end{align}
+wobei
+\begin{itemize}
+\item $g^{\nu}: \R^{n_{\nu}} \lto \R^{m_{\nu}}$
+\item $h^{\nu}: \R^{n_{\nu}} \lto \R^{l_{\nu}}$
+\end{itemize}
+stetig differenzierbare Funktionen seien. Ein Vektor $x^{*}$ ist genau dann ein NGG, wenn für jedes $\nu = 1, \dots, N$ die Komponente $x^{*, \nu}$ eine Lösung der Optimierungsaufgabe
+\begin{align}\label{eq:opt_ngg} % 3.10
+  f_{\nu}(x^{\nu}, x^{*, -\nu}) \lto \min_{x^{\nu}}, \quad g^{\nu} (x^{\nu}) \leq 0, \, h^{\nu} (x^{\nu}) = 0,
+\end{align}
+ist. Für $\nu = 1, \dots, N$ definieren wir $L_{\nu}: \R^{n_{\nu}} \times \R^{m_{\nu}} \times \R^{l_{\nu}} \lto \R$ durch
+\begin{align*}
+  L_{\nu}(x^{\nu}, x^{-\nu}, \lambda^{\nu}, \mu^{\nu}) \coloneqq f_{\nu}(x^{\nu}, x^{-\nu}) + (\lambda^{\nu})^{T}g^{\nu}(x^{\nu}) + (\mu^{\nu})^{T}x(x^{\nu}). 
+\end{align*}
+DAnn ist $L_{\nu}(\cdot, x^{*, -\nu}, \cdot, \cdot)$ die zu \eqref{eq:opt_ngg} gehörende \markdef{Lagrange-Funktion}. Damit kann das KKT-System zur Optimierungsaufgabe \eqref{eq:opt_ngg} aufgestellt werden:
+\begin{align}\label{eq:kkt_*} %3.11
+&  \nabla_{x^{\nu}}L_{\nu}(x^{\nu}, x^{-\nu}, \lambda^{\nu}, \mu^{\nu}) = 0\\
+&h^{\nu}(x^{\nu}) = 0\notag\\
+&g^{\nu}(x^{\nu}) \leq 0\notag\\
+&\lambda^{\nu} \geq 0,\notag\\
+&(\lambda^{\nu})^{T}g^{\nu}(x^{\nu})= 0 \notag
+\end{align}
+Ist $x^{*, \nu}$ die Lösung von \eqref{eq:opt_ngg} und ist in $x^{*, \nu}$ die ACQ (Abadie Constraint Qualification) erfüllt, dann existieren
+\begin{align*}
+  \lambda^{*, \nu} \in \R^{m_{\nu}}, \, \mu^{*, \nu} \in \R^{l_{\nu}}, 
+\end{align*}
+sodass $(x^{*, \nu}, \lambda^{*, \nu}, \mu^{*, \nu})$ das System \eqref{eq:kkt_*} löst. Löst umgekehrt $(x^{*, \nu}, \lambda^{*, \nu}, \mu^{*, \nu})$ das System \eqref{eq:kkt_*} und ist $f_{\nu}(\cdot, x^{*, -\nu})$ konvex, $h^{\nu}$ affin und jede Komponente $g_{i}^{\nu}$ quasikonvex, dann löst $x^{*, \nu}$ die Optimierungsaufgabe \eqref{eq:opt_ngg}. 
+\begin{align}\label{eq:kkt}
+&  L(x, \lambda, \mu)= 0\\
+&h(x) = 0\notag\\
+&g(x) \leq 0\notag\\
+&\lambda \geq 0,\notag\\
+&g(x)^{T} \lambda = 0 \notag
+\end{align}
+mit
+\begin{itemize}
+\item $x = (x^{1}, \dots, x^{N})^{T} \in \R^{n}$
+\item $\lambda = (\lambda^{1}, \dots, \lambda^{N})^{T} \in \R^{m}$
+\item $\mu = (\mu^{1}, \dots, \nu^{N})^{T} \in \R^{l}$
+\end{itemize}
+mit $n = n_{1} + \dots + n_{N}$, $m = m_{1} + \dots + m_{N}$ $l = l_{1} + \dots + l_{N}$ sowie
+\begin{align}\label{eq:3-12}
+&  L(x, \lambda, \mu) \coloneqq
+  \begin{pmatrix}
+      \nabla_{x^1}L_{1}(x^{1}, x^{-1}, \lambda^{1}, \mu^{1})\\
+\vdots\\
+\nabla_{x^N}L_{N}(x^{N}, x^{-N}, \lambda^{N}, \mu^{N})
+  \end{pmatrix} \in \R^{N}, \\
+&g(x) \coloneqq (g^{1}(x)  \dots g^{N}(x))^{T} \in \R^{m}, \\
+&h(x) \coloneqq (h^{1}(x)  \dots h^{N}(x))^{T} \in \R^{l}
+\end{align}
+%\datum{08. Juni 2015}
+
+\begin{satz}\label{thm:3.19}
+  Die Mengen $X_{\nu}$ seien durch \eqref{eq:opt_ngg} gegeben mit stetig differenzierbaren Funktionen $g^{\nu}, h^{\nu}$, $\nu = 1, \dots, N$. Weiterhin seien die Funktionen $f_{\nu}$ stetig differenzierbar. Dann gilt:
+  \begin{enumerate}
+  \item Sei $x^{*} \in X$ ein NGG. Für jedes $\nu \in \set{1, \dots, N}$ sei in $x^{*, \nu}$ im Problem \eqref{eq:kkt_*} die ACQ erfüllt. Dann exisitieren $\lambda^{*} \in \R^{m}, \mu^{*} \in \R^{l}$, sodass $(x^{*}, \lambda^{*}, \mu^{*})$ eine Lösung des KKT-Systems \eqref{eq:3-12} ist. 
+  \item Die Funktionen $f_{\nu}(\cdot, x^{-\nu})$ seien konvex für $\nu = 1, \dots, N$ und alle $x^{-\nu} \in \R^{n_{-\nu}}$. Außerdem seien die Funktionen $g_{i}$ quasikonvex für alle $i = 1, \dots, m$ und $h$ affin. Ist $(x^{*}, \lambda^{*}, \mu^{*})$ eine Lösung von \eqref{eq:3-12}, so ist $x^{*}$ ein NGG. 
+  \end{enumerate}
+\end{satz}
+\begin{beweis}
+  \begin{enumerate}
+  \item Sei $x^{*}$ NGG. Dann ist für $\nu = 1, \dots, N$ $x^{*, \nu}$ eine Lösung der Optimierungsaufgabe \eqref{eq:kkt_*}. Da in $x^{*, \nu}$ die ACQ gilt, existieren $\lambda^{*, \nu}\in \R^{m_{\nu}}$, $\mu^{*, \nu}\in \R^{l_{\nu}}$, sodass $(x^{*, \nu}, \lambda^{*, \nu}, \mu^{*, \nu})$  das System \eqref{eq:kkt}. Setzen wir $\lambda^{*} \coloneqq (\lambda^{*, \nu})_{\nu = 1}^{N}$, $\mu^{*} \coloneqq (\mu^{*, \nu})_{\nu = 1}^{N}$, so folgt, dass  $(x^{*}, \lambda^{*}, \mu^{*})$  das System \eqref{eq:3-12} löst. 
+  \item Sei $(x^{*}, \lambda^{*}, \mu^{*})$ eine Lösung von \eqref{eq:3-12}. Folglich löst das Tripel  $(x^{*, \nu}, \lambda^{*, \nu}, \mu^{*, \nu})$ das System \eqref{eq:kkt}. Aufgrund der Konvexitätsvoraussetzungen ist daher $x^{*,\nu}$ eine Lösung von \eqref{eq:kkt_*}. Da das für jedes $\nu = 1, \dots, N$ gilt, ist $x^{*}$ ein NGG.  
+  \end{enumerate}
+\end{beweis}
+\begin{beispiel}\label{ex:3-2} Cournot-Oligopol mit $N = 2$ Unternehmen
+  \begin{itemize}
+  \item $X_{1} = X_{2} = [0, \infty)$
+  \item $p(x_{1}, x_{2}) = b - x_{1} - x_{2}$ ist der Preis einer Einheit des Produkts für $b > 0$
+  \item $K_{\nu}(x_{\nu}) = k x_{\nu}^{2}$ für $\nu = 1, 2$ und $ k > 0$
+  \item $f_{1}(x_{1}, x_{2}) = - x_{1}(b- x_{1} - x_{2}) + kx_{1}^{2} = (k + 1) x_{1}^{2} - (b - x_{2})x_{1}$
+  \item $f_{2}(x_{1}, x_{2}) = - x_{2}(b- x_{2} - x_{1}) + kx_{2}^{2} = (k + 1) x_{2}^{2} - (b - x_{1})x_{2}$
+  \item $g_{1}(x_{1})\coloneqq - x_{1} \leq 0$, $g_{2}(x_{2})\coloneqq - x_{2} \leq 0$, $g_{1/2}$ sind linear, sodass für jeden Spieler überall die ACQ gilt. Damit liefert jedes NGG schon eine Lösung $(x^{*}, \lambda^{*})$ des KKT-Systems. 
+  \end{itemize}
+Die Funktion $f_{1}$ ist konvex bezüglich $x_{1}$ für alle $x_{2}$ und $f_{2}$ ist konvex bezüglich $x_{2}$ für alle $x_{1}$. Die Funktionen $g_{1/2}$ sind linear und damit konvex. Daher liefert jede Lösung des KKT-Systems ein NGG.
+\begin{align*}
+ & \cL(x_{1}, x_{2}, \lambda_{1}, \lambda_{2}) =
+  \begin{pmatrix}
+    \nabla_{x_{1}}f_{1}(x_{1}, x_{2}) + \lambda_{1} g_{1}' (x_{1})\\
+    \nabla_{x_{2}}f_{2}(x_{1}, x_{2}) + \lambda_{2} g_{2}' (x_{2})
+  \end{pmatrix}
+=
+\begin{pmatrix}
+  2(k+1)x_{1} - (b - x_{2}) - \lambda_{1}\\
+  2(k+1)x_{2} - (b - x_{1}) - \lambda_{2}
+\end{pmatrix}
+\stackrel ! =
+\begin{pmatrix}
+  0\\0
+\end{pmatrix}\\
+&\lambda_{1/2} \geq 0, \quad x_{1/2} \geq 0, \quad \lambda_{1}x_{1} = 0, \quad \lambda_{2}x_{2} = 0 \notag
+\end{align*}
+\begin{align}\label{eq:3-13}
+  \lambda_{1} = 2(k + 1)x_{1} - (b - x_2), \quad   \lambda_{2} = 2(k + 1)x_{2} - (b - x_1)
+\end{align}
+Fallunterscheidung:
+\begin{itemize}
+\item $x_{1} = x_{2} = 0$. Aus \eqref{eq:3-13} folgt $\lambda_{1/2} = - b < 0$, falsch!
+\item $x_1 = 0$, $2(k + 1)x_{2} - (b - x_{1})= 0$, daraus folgt mit \eqref{eq:3-13}
+  \begin{align*}
+    &x_{2} = \frac b {2(k + 1)}\\
+    &\lambda_{1} = 2(k + 1)\cdot 0 - \( b - \frac b {2(k + 1)}\) =  - b\underbrace{\( 1 - \frac 1 {2(k + 1)}\)}_{< 1} < 0
+  \end{align*}
+Falsch!
+\item $x_{2} = 0$, $2(k + 1)x_{1} - (b - x_{2})= 0$ Falsch!
+\item $2(k + 1)x_{1} - (b - x_{2})= 0$ und $2(k + 1)x_{2} - (b - x_{1})= 0$. Dann ist $x_{2} = b - 2(k + 1)x_{1}$,
+  \begin{align*}
+    &2(k + 1)(b - 2(k + 1)x_{1}) - (b-x_{1}) = 0\\
+    & 2b(k + 1) - b = 4(k + 1)^{2}x_{1} - x_{1}\\
+    &2b\(k - \frac 1 2\) = 4 \(k^{2} + 2k +1\)x_{1} - x_{1} = 4\(k^{2} + 2k + \frac 3 4\)x_{1}\\
+    \implies& x_{1} = \frac b {2k + 3} = x_{2}
+  \end{align*}
+Also ist $\(x_{1}^{*}, x_{2}^{*}, \lambda_{1}^{*}, \lambda_{2}^{*}\) = \(\frac b {2k +2}, \frac b {2k +3}, 0, 0\)$.
+\end{itemize}
+\end{beispiel}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "vorlesung"
+%%% End: 
