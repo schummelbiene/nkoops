@@ -6,7 +6,7 @@
   \begin{itemize}
   \item  eine Menge $\set{1, \dots, N}$ von Spielern;
   \item  eine nichtleere Strategiemenge $X_{\nu}$ für jeden Spieler $\nu = 1, \dots, N$;
-  \item Funktionen $f_{\nu}: X \to \R$ (sogenannte \markdef{Zielfunktion} des Spielers $\nu$) für $\nu = 1, \dots, N$, wobei $X \coloneqq= X_{1} \times \dots \times X_{N}$ die \markdef{Menge aller Strategiekombinationen} bezeichnet. 
+  \item Funktionen $f_{\nu}: X \to \R$ (sogenannte \markdef{Zielfunktion} des Spielers $\nu$) für $\nu = 1, \dots, N$, wobei $X \coloneqq X_{1} \times \dots \times X_{N}$ die \markdef{Menge aller Strategiekombinationen} bezeichnet. 
   \end{itemize}
 Zur Abkürzung für ein solches Spiel schreiben wir
 \begin{align*}
@@ -107,7 +107,7 @@ vertikal: Spieler 1, horizontal: Spieler 2
 
 \begin{beispiel} Oligopol-Modell nach Cournot
   
-Ein Produkt werde von $N$ Unternehmen hergestellt. Es wird angenommen, dass es keine weiteren Hersteller dieses Produktes gibt. Es werde mit $X_{\nu}$ die vom Unternehmen $\nu$ hergestellte Menge bezeichnet. Der auf dem Markt zu erziehlende Preis für eine Einheit des Produkts sei gegeben durch
+Ein Produkt werde von $N$ Unternehmen hergestellt. Es wird angenommen, dass es keine weiteren Hersteller dieses Produktes gibt. Es werde mit $x_{\nu}$ die vom Unternehmen $\nu$ hergestellte Menge bezeichnet. Der auf dem Markt zu erziehlende Preis für eine Einheit des Produkts sei gegeben durch
 \begin{align*}
   p(x_{1}, \dots, x_{N}) = b-(x_{1} + \dots + x_{N})
 \end{align*}
@@ -132,7 +132,7 @@ Modellierung als $N$-Personen-Spiel:
 \end{itemize}
 \end{beispiel}
 \subsection{Nash-Gleichgewichte}
-Es sei $\Gamma = \set{f_{\nu}, X_{\nu}}_{\nu = 1}^{N}$ und $f_{\nu}$ soll maximiert werden für alle $\nu$. Ein Element aus $X_{\nu}$ werde mit $x^{\nu}$ bezeichnet (oder mit $x_{\nu}$, falls $X_{\nu} \subseteq \R$). Ferner sei
+Es sei $\Gamma = \set{f_{\nu}, X_{\nu}}_{\nu = 1}^{N}$ und $f_{\nu}$ soll minimiert werden für alle $\nu$. Ein Element aus $X_{\nu}$ werde mit $x^{\nu}$ bezeichnet (oder mit $x_{\nu}$, falls $X_{\nu} \subseteq \R$). Ferner sei
 \begin{align*}
   x = (x_{1}, \dots, x_{N}) \in X_{1} \times \dots \times X_{N}.
 \end{align*}
@@ -163,9 +163,9 @@ für alle $x^{0} \in X_{\nu}$ oder
 \begin{definition}
   Für jedes $\nu = 1, \dots, N$ und jedes $x^{-\nu} \in X_{-\nu}\coloneqq \prod_{\eta = 1, \eta \neq \nu}^{N} X_{\eta}$ definieren wir durch
   \begin{align*}
-    S_{\nu}(x^{-\nu}) \coloneqq \set{x^{\nu}\in X_{\nu}\setminus f_{\nu}(x^{\nu}, x^{-\nu}) \leq f_{\nu}(y^{\nu}, x^{-\nu}) \text{für alle} y^{\nu} \in X_{\nu}} 
+    S_{\nu}(x^{-\nu}) \coloneqq \set{x^{\nu}\in X_{\nu}\setminus f_{\nu}(x^{\nu}, x^{-\nu}) \leq f_{\nu}(y^{\nu}, x^{-\nu}) \text{für alle } y^{\nu} \in X_{\nu}} 
   \end{align*}
-die Menge der besten Antworten des Spielers $\nu$ auf die Strategiekombination $x^{-\nu}$ der Gegenspieler. Die mengenwertige Abbildung $x^{-\nu}\mapsto S_{\nu}(x^{-\nu})$ heißt Beste-Antwort-Funktion.
+die Menge der besten Antworten des Spielers $\nu$ auf die Strategiekombination $x^{-\nu}$ der Gegenspieler. Die mengenwertige Abbildung $x^{-\nu}\mapsto S_{\nu}(x^{-\nu})$ heißt \markdef{Beste-Antwort-Funktion}.
 \end{definition}
 \begin{satz}
   Eine Strategiekombination $x^{*} \in X$ ist genau dann ein NGG des Spiels, wenn $x^{*}$ Fixpunkt der mengenwertigen Abbildung $x \mapsto S(x)$ ist, das heißt, wenn $x^{*} \in S(x^{*})$ gilt. 
@@ -175,7 +175,9 @@ Sei $x^{*} \in X$ beliebig gewählt. Unter Beachtung der Definition des NGG sowi
 
 $x^{*}$ ist NGG $\iff$
 \begin{align*}
-  \forall \nu \in \set{1, \dots, N} \forall x^{\nu}\in X_{\nu}: \, f_{\nu}(x^{*, \nu}, x^{*, -\nu})\leq f_{\nu}(x^{\nu}, x^{*, -\nu}) \iff \forall \nu \in \set{1, \dots, N}: \, x^{*, \nu}\in S_{\nu}(x^{*, -\nu}) \iff x^{*} \in S(x^{*}).
+  \forall \nu \in \set{1, \dots, N} \forall x^{\nu}\in X_{\nu}: \, &f_{\nu}(x^{*, \nu}, x^{*, -\nu})\leq f_{\nu}(x^{\nu}, x^{*, -\nu}) \\
+\iff &\forall \nu \in \set{1, \dots, N}: \, x^{*, \nu}\in S_{\nu}(x^{*, -\nu}) \\
+\iff &x^{*} \in S(x^{*}).
 \end{align*}
 \end{beweis}
 
@@ -278,7 +280,7 @@ Ziel: maximale Auszahlung.
   \begin{align*}
     \sum_{\nu = 1}^{N} f_{\nu}(x) = 0.
   \end{align*}
-Sonst heißt es \markdef{Nullsummenspiel}. 
+Sonst heißt es \markdef{Plus-/Minus-Summenspiel}. 
 \end{definition*}
  Endliche \markdef{Zwei-Personen-Spiele} heißen auch \markdef{Bi-Matrix-Spiele}. Seien $x_{1}, \dots, x_{m}$ die Strategien von Spieler 1 und $y_{1}, \dots, y_{n}$ die Strategien von Spieler 2. Dann lassen sich die Auszahlungsfunktionen $f_{1/2}$ vollständig durch die Matrizen
  \begin{align*}
@@ -291,3 +293,8 @@ beschrieben werden. In endlichen Zwei-Personen-Nullsummenspielen gilt $B = -A$, 
 \item \emph{statische} vs. dynamische Spiele (dynamische sind zeitabhängig)
 \item Spiele mit \emph{vollständiger} vs. unvollständiger Information
 \end{itemize}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "vorlesung"
+%%% End: 
